@@ -155,9 +155,9 @@ const editprofile = async (req, res) => {
 
 const addproject = async (req, res) => {
     try {
-        const { userid, name, photo, technologies, github_link, live_preview_link } = req.body;
+        const { userid, name, technologies, github_link, live_preview_link } = req.body;
+        const photo = req.file
 
-        // Validate required fields
         if (!name || !technologies || !github_link) {
             return res.json({
                 success: false,
@@ -165,8 +165,16 @@ const addproject = async (req, res) => {
             });
         }
 
-        // Find the user by ID
         const user = await userModel.findById(userid);
+
+        const isDuplicate = user.projects.some((project) => project.name === name);
+        if (isDuplicate) {
+            return res.status(400).json({
+                success: false,
+                message: `A project with the name "${name}" already exists.`,
+            });
+        }
+
         if (!user) {
             return res.json({
                 success: false,
@@ -174,39 +182,21 @@ const addproject = async (req, res) => {
             });
         }
 
-        let uploadedPhoto = '';
-        if (photo) {
-            try {
-                const uploadResult = await cloudinary.uploader.upload(photo, {
+        const imageUpload = await cloudinary.uploader.upload(photo.path, { resource_type: "image" })
+        const imageurl = imageUpload.secure_url
 
-                    resource_type: 'image',
-                });
-                uploadedPhoto = uploadResult.secure_url;
-            } catch (uploadError) {
-                return res.json({
-                    success: false,
-                    message: 'Error uploading photo to Cloudinary: ' + uploadError.message,
-                });
-            }
-        }
-
-
-        // Create the new project
         const newProject = {
             name,
-            photo: uploadedPhoto || '',
+            photo: imageurl,
             technologies,
             github_link,
             live_preview_link: live_preview_link || '',
 
         };
 
-
         user.projects.push(newProject);
 
-
         await user.save();
-
 
         return res.status(200).json({
             success: true,
@@ -351,7 +341,7 @@ const addskills = async (req, res) => {
     }
 }
 
-const showskills = async (req,res) => {
+const showskills = async (req, res) => {
     try {
 
         const { userid } = req.body
@@ -368,23 +358,45 @@ const showskills = async (req,res) => {
 
 const showAllProjects = async (req, res) => {
     try {
-      const { userid } = req.body; // Extract user ID from the request body
-  
-      // Fetch the user by ID and select only the 'projects' field
-      const user = await userModel.findById(userid).select('projects');
-  
-      // If user or projects are not found
-      if (!user || !user.projects || user.projects.length === 0) {
-        return res.status(404).json({ success: false, message: 'No projects found for this user' });
-      }
-  
-      // Return the user's projects
-      return res.status(200).json({ success: true, projects: user.projects });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ success: false, message: 'Server error' });
-    }
-  };
-  
+        const { userid } = req.body; // Extract user ID from the request body
 
-export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects };
+        // Fetch the user by ID and select only the 'projects' field
+        const user = await userModel.findById(userid).select('projects');
+
+        // If user or projects are not found
+        if (!user || !user.projects || user.projects.length === 0) {
+            return res.status(404).json({ success: false, message: 'No projects found for this user' });
+        }
+
+        // Return the user's projects
+        return res.status(200).json({ success: true, projects: user.projects });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
+// without auth data
+
+const allusersprojects = async (req, res) => {
+    try {
+        const projects = await userModel.find({}).select(['projects'])
+        res.json({ success: true, projects })
+    } catch (error) {
+        console.error(error);
+        return res.json({ success: false, message: 'Server error' });
+    }
+}
+
+const alldevelopers = async (req,res) => {
+    try {
+        const developers = await userModel.find({}).select(['name','profile_photo','role'])
+        res.json({ success: true, developers })
+    } catch (error) {
+        console.error(error);
+        return res.json({ success: false, message: 'Server error' });
+    }
+}
+
+
+export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects, allusersprojects, alldevelopers };

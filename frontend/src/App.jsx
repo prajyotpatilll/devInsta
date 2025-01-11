@@ -1,16 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Home from "./pages/Home";
+import Navbar from "./componants/Navbar";
+import Footer from "./componants/Footer";
+import Developers from "./pages/Developers";
+import DevelopersProfile from "./pages/DevelopersProfile";
+import Projects from "./pages/Projects";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <div className='flex items-center justify-center'>
-      prajyot
-    </div>
-  )
-}
+    <div>
+      <ToastContainer />
 
-export default App
+      <header>
+        <Navbar />
+      </header>
+
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/developers" element={<Developers />} />
+          <Route path="/developers:id" element={<DevelopersProfile />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+      </main>
+
+      <footer>
+        <Footer />
+      </footer>
+    </div>
+  );
+};
+
+export default App;
