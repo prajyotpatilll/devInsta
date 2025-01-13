@@ -12,7 +12,9 @@ const AppContextProvide = (props) => {
 
   const [token, settoken] = useState(localStorage.getItem('token')?localStorage.getItem('token'):false);
   const [projects,setprojects] = useState([])
+  const [developers, setdevelopers] = useState([])
 
+  //get all priojects list
   const getallprojects = async ()=>{
     try {
       const {data} = await axios.get(backendURL + "/api/user/allprojects")
@@ -30,15 +32,34 @@ const AppContextProvide = (props) => {
 
   }
 
+  //get all developers list
+  const getalldevelopers = async () => {
+    try {
+      const {data} = await axios.get(backendURL + "/api/user/alldevelopers")
+      if(data.success){
+        setdevelopers(data.developers)
+        console.log(data.developers)
+      }
+      else{
+        toast.error(data.error)
+      }
+      
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
   const value = {
     token,
     settoken,
     backendURL,
-    projects  
+    projects,
+    developers  
   };
 
   useEffect(()=>{
       getallprojects()
+      getalldevelopers()
   },[])
 
 

@@ -7,9 +7,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: gilroy;
+    font-family: Haffer,sans-serif;
     color: #fff;
-    background-color: black;
+    background-color: #191b2b;
 }
 
 .active hr{

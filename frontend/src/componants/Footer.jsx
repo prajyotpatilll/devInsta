@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='bg-green-500'>
+    <div className='flex items-center justify-center text-gray-500 p-10'>
       All Copyrights Reserved By Thinksoftonic@gmail.com !!!
     </div>
   )
