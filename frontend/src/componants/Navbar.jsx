@@ -13,7 +13,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className=" p-6 flex justify-around items-center   min-h-[10vh]">
+    <div className=" p-6 flex justify-around items-center  min-h-[10vh]">
       <div className="text-2xl sm:text-4xl md:text-5xl lg:text-4xl font-extrabold text-[#f84f39]  bg-transparent">
            <span className="text-[#2a966f] bg-transparent ">&lt;</span>DevInsta
           <span className="text-[#2a966f] bg-transparent">/&gt;</span>

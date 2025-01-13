@@ -16,7 +16,10 @@ import upload_icon from './upload_icon.png'
 import stripe_logo from './stripe_logo.png'
 import razorpay_logo from './razorpay_logo.png'
 import video from './video.mp4'
-
+import arrow from './download.svg'
+import bomb from './d12.svg'
+import raw from './d22.svg'
+import rawx from './d44.svg'
 
 
 export const assets = {
@@ -37,6 +40,10 @@ export const assets = {
     upload_icon,
     stripe_logo,
     razorpay_logo,
-    video
+    video,
+    arrow,
+    bomb,
+    raw,
+    rawx
 }
 

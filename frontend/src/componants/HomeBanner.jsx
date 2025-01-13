@@ -13,6 +13,9 @@ const HomeBanner = () => {
           className="relative  w-auto h-[75vh] rounded-l-3xl -right-1/4" 
         />
       </div>
+      <div className="relative z-5 right-32 bottom-40">
+        <img src={assets.bomb} alt="" />
+      </div>
 
       <div className="absolute z-10 left-60  bg-transparent flex flex-col items-center p-5  justify-center">
         <div className="text-2xl sm:text-4xl md:text-5xl lg:text-8xl font-extrabold text-white mb-4 bg-transparent">

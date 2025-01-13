@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/Appcontext";
 import { useNavigate } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const ProjectList = () => {
   const { projects } = useContext(AppContext);
@@ -12,6 +13,9 @@ const ProjectList = () => {
        
        {/* demo */}
        <div className="flex flex-col items-start justify-center ">
+        <div>
+          <img className="py-5" src={assets.raw} alt="" />
+        </div>
         <div className="flex">
           <h2 className="text-5xl font-bold pb-3">Discover innovative</h2>
           <h2 className="text-5xl font-bold pb-3 pl-3 text-gray-500">
