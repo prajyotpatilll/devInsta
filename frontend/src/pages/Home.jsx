@@ -5,7 +5,7 @@ import DevsProfiles from '../componants/DevsProfiles'
 
 const Home = () => {
   return (
-    <div >
+    <div className='flex flex-col justify-center w-full'>
       <HomeBanner />
       <ProjectList/>
       <DevsProfiles/>

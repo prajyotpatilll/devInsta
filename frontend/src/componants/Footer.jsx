@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 const Footer = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-[100vw] pt-40 flex flex-col justify-center items-center">
-      <div className="flex justify-evenly px-80 item-center w-full">
+    <div className="w-[100vw] lg:pt-40 pt-10 flex flex-col justify-center items-center">
+      <div className="flex justify-evenly px-10 item-center w-[100vw]">
         <div>
           <p className="text-lg font-bold text-[#f84f39]">Explore</p>
           <p
@@ -59,8 +59,8 @@ const Footer = () => {
           </p>
         </div>
 
-        <div>
-          <p className="text-lg font-bold text-[#8782ee]">Updates</p>
+        <div className="md:flex items-start flex-col hidden">
+          <p className="text-lg font-bold text-[#8782ee] ">Updates</p>
           <div className=" w-60 p-6 bg-[#20202e] rounded-xl mt-5">
             <p className="text-gray-500 bg-[#20202e] pb-3">version 0.01.0</p>
             <p className="text-xl font-bold bg-[#20202e]">Project was in</p>
@@ -69,7 +69,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="relative bottom-0 flex items-center justify-center text-gray-500 py-20">
+      <div className="relative md:text-sm text-xs  flex items-center justify-center text-gray-500 py-20">
         All Copyrights Reserved By Thinksoftonic@gmail.com !!!
       </div>
     </div>

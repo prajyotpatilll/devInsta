@@ -22,7 +22,7 @@ const Projects = () => {
 
         {/* demo */}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 py-16">
           {projects.map((item) =>
             item.projects.map((project) => (
               <div
@@ -44,7 +44,7 @@ const Projects = () => {
                     <strong className="bg-[#525676]">Technologies:</strong>{" "}
                     {project.technologies.join(", ")}
                   </p>
-                  <div className="flex space-x-2 bg-[#525676]">
+                  <div className="flex gap-1 bg-[#525676]">
                     <a
                       href={project.github_link}
                       target="_blank"

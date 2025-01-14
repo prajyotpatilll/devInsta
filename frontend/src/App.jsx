@@ -12,7 +12,7 @@ import "./App.css";
 
 const App = () => {
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center w-[100vw]">
       <ToastContainer />
 
       <header>

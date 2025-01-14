@@ -8,7 +8,7 @@ const ProjectList = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container flex flex-col items-center justify-center mx-auto p-20 max-h-auto max-w-[100vw] ">
+    <div className="container flex flex-col items-center justify-center mx-auto md:p-20 p-5 max-h-auto max-w-[100vw] ">
       
        
        {/* demo */}
@@ -17,13 +17,13 @@ const ProjectList = () => {
           <img className="py-5" src={assets.raw} alt="" />
         </div>
         <div className="flex">
-          <h2 className="text-5xl font-bold pb-3">Discover innovative</h2>
-          <h2 className="text-5xl font-bold pb-3 pl-3 text-gray-500">
+          <h2 className="lg:text-5xl md:text-4xl text-2xl sm:text-3xl font-bold md:pb-3 pb-1">Discover innovative</h2>
+          <h2 className="lg:text-5xl md:text-4xl text-2xl sm:text-3xl font-bold md:pb-3 pb-1 pl-3 text-gray-500">
           Creations
           </h2>
         </div>
 
-        <h2 className="text-5xl font-bold  text-gray-500">
+        <h2 className="lg:text-5xl md:text-4xl text-2xl sm:text-3xl font-bold  text-gray-500">
         from developers around the world.
         </h2>
       </div>
@@ -31,7 +31,7 @@ const ProjectList = () => {
        {/* demo */}
       
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 py-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6 py-16">
         {projects.slice(0,10).map((item) =>
           item.projects.slice(0, 10).map((project)  => (
             <div
@@ -51,7 +51,7 @@ const ProjectList = () => {
                   <strong className="bg-[#525676]" >Technologies:</strong>{" "}
                   {project.technologies.join(", ")}
                 </p>
-                <div className="flex space-x-2 bg-[#525676]">
+                <div className="flex gap-1 bg-[#525676]">
                   <a
                     href={project.github_link}
                     target="_blank"
