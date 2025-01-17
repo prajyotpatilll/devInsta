@@ -1,5 +1,5 @@
 import express from 'express'
-import { addproject, addskills, alldevelopers, allusersprojects, deleteProject, editProject, editprofile, getprofile, loginUser, registerUser, showAllProjects, showskills } from '../controller/usercontroll.js'
+import { addproject, addskills, alldevelopers, allusersprojects, deleteProject, editProject, editprofile, getprofile, loginUser, registerUser, selecteddev, showAllProjects, showskills } from '../controller/usercontroll.js'
 import authuser from '../middleware/authuser.js'
 import upload from '../middleware/multer.js'
 const useRouter = express.Router()
@@ -22,4 +22,5 @@ useRouter.get('/showallprojects', authuser, showAllProjects)
 
 useRouter.get('/allprojects', allusersprojects)
 useRouter.get('/alldevelopers', alldevelopers)
+useRouter.get('/selecteddev', selecteddev)
 export default useRouter

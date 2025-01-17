@@ -20,7 +20,7 @@ const AppContextProvide = (props) => {
       const {data} = await axios.get(backendURL + "/api/user/allprojects")
       if(data.success){
         setprojects(data.projects)
-        console.log(data.projects)
+        // console.log(data.projects)
       }
       else{
         toast.error(data.error)
@@ -38,7 +38,7 @@ const AppContextProvide = (props) => {
       const {data} = await axios.get(backendURL + "/api/user/alldevelopers")
       if(data.success){
         setdevelopers(data.developers)
-        console.log(data.developers)
+        // console.log(data.developers)
       }
       else{
         toast.error(data.error)

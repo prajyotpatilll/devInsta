@@ -9,6 +9,8 @@ import Developers from "./pages/Developers";
 import DevelopersProfile from "./pages/DevelopersProfile";
 import Projects from "./pages/Projects";
 import "./App.css";
+import Login from "./pages/Login";
+import Myprofile from "./pages/Myprofile";
 
 const App = () => {
   return (
@@ -23,8 +25,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/developers" element={<Developers />} />
-          <Route path="/developers/:userid" element={<DevelopersProfile />} />
+          <Route path="/developers/:_id" element={<DevelopersProfile />} />
+          <Route path="/myprofile" element={<Myprofile />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
       </main>
 

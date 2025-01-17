@@ -3,18 +3,19 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/Appcontext";
 import { assets } from "../assets/assets.js";
 const Navbar = () => {
-  // const {token, settoken} = useContext(AppContext)
+  const {token, settoken} = useContext(AppContext)
   const navigate = useNavigate();
 
   //testing purpose
-  const [token, settoken] = useState(true);
+  
   const logout = () => {
     settoken(false);
+    localStorage.removeItem("token");
   };
 
   return (
     <div className=" lg:p-6 md:px-16 px-3 flex justify-between items-center w-[100vw]  min-h-[10vh] lg:justify-around">
-      <div className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-extrabold text-[#f84f39]  bg-transparent flex justify-center">
+      <div onClick={()=>{navigate('/');window.scrollTo(0, 0)}} className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-extrabold text-[#f84f39]  bg-transparent flex justify-center">
         <span className="text-[#2a966f] bg-transparent ">&lt;</span>DevInsta
         <span className="text-[#2a966f] bg-transparent">/&gt;</span>
       </div>
@@ -50,10 +51,10 @@ const Navbar = () => {
                 />
               </div>
 
-              <div className="rounded-lg absolute top-full mt-2 py-5 px-12 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300 text-lg z-50">
+              <div className="rounded-lg absolute top-full mt-2 py-5 px-12  transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300 text-lg z-50">
                 <p
                   className="mb-4 cursor-pointer bg-transparent"
-                  onClick={() => navigate("./developers:id")}
+                  onClick={()=>navigate(`/myprofile`)}
                 >
                   Profile
                 </p>
@@ -70,7 +71,7 @@ const Navbar = () => {
             </div>
           ) : (
             <button
-              onClick={() => settoken(true)}
+              onClick={() => navigate('/login')}
               className="relative bg-green-600 text-lg px-6 py-2 my-0.5 rounded-full hover:bg-green-700 transition duration-300"
             >
               SIGN UP

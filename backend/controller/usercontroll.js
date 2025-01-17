@@ -92,7 +92,7 @@ const getprofile = async (req, res) => {
 
 const editprofile = async (req, res) => {
     try {
-        const { userid, name, role, description, gender, phone, dob, address } = req.body;
+        const { userid, name, role, description, gender, phone, dob, address, skills } = req.body;
         const files = req.files; // Handle multiple files via req.files (requires multer configuration)
 
         if (!userid || !name || !phone || !dob || !gender) {
@@ -103,7 +103,7 @@ const editprofile = async (req, res) => {
         }
 
         // Build update object
-        const updates = { name, phone, address, dob, gender, role, description };
+        const updates = { name, phone, address, dob, gender, role, description, skills };
 
         // Function to handle file uploads to Cloudinary
         const uploadToCloudinary = async (file, resourceType = "image") => {
@@ -320,7 +320,7 @@ const deleteProject = async (req, res) => {
 const addskills = async (req, res) => {
     try {
         const { userid, skillName, skillUse } = req.body;
-        if (!userid || !skillName || !skillUse) {
+        if (!userid || !skillName) {
             return res.status(400).json({ message: "User ID and skill name are required" });
         }
 
@@ -398,5 +398,26 @@ const alldevelopers = async (req,res) => {
     }
 }
 
+const selecteddev = async (req, res) => {
+    try {
+      const { _id } = req.query; // Access _id from query parameters (not body)
+  
+      if (!_id) {
+        return res.status(400).json({ success: false, message: "User ID is required." });
+      }
+  
+      const userdata = await userModel.findById(_id).select("-password");
+      if (!userdata) {
+        return res.status(404).json({ success: false, message: "User not found." });
+      }
+  
+      return res.json({ success: true, userdata });
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      return res.status(500).json({ success: false, message: "Server error." });
+    }
+  };
+  
+  
 
-export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects, allusersprojects, alldevelopers };
+export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects, allusersprojects, alldevelopers, selecteddev };

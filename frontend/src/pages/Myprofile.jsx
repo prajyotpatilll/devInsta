@@ -1,45 +1,37 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import { AppContext } from "../context/Appcontext";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-const DevelopersProfile = () => {
-  const { backendURL } = useContext(AppContext);
-  const { _id } = useParams(); 
-  const [userdata, setUserdata] = useState(null); // Initialize as null
+const Myprofile = () => {
+  const { token, backendURL } = useContext(AppContext);
 
-  // Fetch user profile
-  const fetchUserProfile = async (_id) => {
+  const [userdata, setuserdata] = useState([]);
+
+  const getmyprofile = async () => {
     try {
-      const { data } = await axios.get(`${backendURL}/api/user/selecteddev`, {
-        params: { _id } // Correctly pass _id as a query parameter
+      const { data } = await axios.get(backendURL + "/api/user/profile", {
+        headers: { token },
       });
       if (data.success) {
-        setUserdata(data.userdata);
+        setuserdata(data.userdata);
+        console.log(data.userdata);
       } else {
-        toast.error(data.message); // Display backend error message
+        toast.error(data.error);
       }
     } catch (error) {
-      toast.error("Failed to fetch user data. Please try again.");
+      toast.error(error.message);
     }
   };
 
   useEffect(() => {
-    if (_id) {
-      fetchUserProfile(_id); // Pass _id to the function
-    }
-  }, [_id, backendURL]);
-
-  // Early return if userdata is null (loading state)
-  if (!userdata) {
-    return <div>Loading...</div>; // Or a loader component if you prefer
-  }
+    getmyprofile();
+  }, [token]);
 
   return (
     <div className="flex flex-col items-center justify-center rounded-lg w-[100vw]">
       <div className="flex flex-col-reverse lg:flex-row items-center justify-between md:border rounded-2xl lg:p-5 p-2 w-full max-w-5xl mx-auto shadow-lg ">
-        <div className="flex flex-col w-full lg:w-[60%] md:p-9 p-4">
+        <div className="flex flex-col w-full lg:w-[60%] md:p-7 p-4">
           <div className="w-full mb-4 flex flex-col justify-end lg:items-start items-center ">
             <p className="text-4xl lg:text-6xl font-bold py-1 text-white">
               {userdata.name}
@@ -51,7 +43,7 @@ const DevelopersProfile = () => {
           <div className=" text-gray-100 flex flex-col justify-end lg:items-start items-center">
             <p className="text-base">Email:- {userdata.email}</p>
             <p className="text-base pb-5">Contact:-{userdata.phone}</p>
-            <p className="md:text-sm text-sm text-center lg:text-left ">{userdata.description}</p>
+            <p className="md:text-sm text-sm text-center lg:text-left text-gray-300">{userdata.description}</p>
           </div>
         </div>
         <div className="mt-0 lg:mt-0 lg:ml-6 ">
@@ -141,4 +133,4 @@ const DevelopersProfile = () => {
   );
 };
 
-export default DevelopersProfile;
+export default Myprofile;
