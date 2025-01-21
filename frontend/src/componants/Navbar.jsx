@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div className=" lg:p-6 md:px-16 px-3 flex justify-between items-center w-[100vw]  min-h-[10vh] lg:justify-around">
-      <div onClick={()=>{navigate('/');window.scrollTo(0, 0)}} className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-extrabold text-[#f84f39]  bg-transparent flex justify-center">
+      <div onClick={()=>{navigate('/');window.scrollTo(0, 0)}} className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-extrabold text-[#f84f39]  bg-transparent flex justify-center cursor-pointer">
         <span className="text-[#2a966f] bg-transparent ">&lt;</span>DevInsta
         <span className="text-[#2a966f] bg-transparent">/&gt;</span>
       </div>

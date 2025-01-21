@@ -400,7 +400,7 @@ const alldevelopers = async (req,res) => {
 
 const selecteddev = async (req, res) => {
     try {
-      const { _id } = req.query; // Access _id from query parameters (not body)
+      const { _id } = req.query; 
   
       if (!_id) {
         return res.status(400).json({ success: false, message: "User ID is required." });
@@ -417,7 +417,4 @@ const selecteddev = async (req, res) => {
       return res.status(500).json({ success: false, message: "Server error." });
     }
   };
-  
-  
-
 export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects, allusersprojects, alldevelopers, selecteddev };
