@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/Appcontext";
 import { assets } from "../assets/assets.js";
 const Navbar = () => {
-  const {token, settoken} = useContext(AppContext)
+  const {token, settoken, userdata} = useContext(AppContext)
   const navigate = useNavigate();
 
   //testing purpose
@@ -54,7 +54,7 @@ const Navbar = () => {
               <div className="rounded-lg absolute top-full mt-2 py-5 px-12  transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300 text-lg z-50">
                 <p
                   className="mb-4 cursor-pointer bg-transparent"
-                  onClick={()=>navigate(`/myprofile`)}
+                  onClick={()=>navigate(`/developers/${userdata._id}`)}
                 >
                   Profile
                 </p>

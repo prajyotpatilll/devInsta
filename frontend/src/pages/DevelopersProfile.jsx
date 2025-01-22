@@ -5,20 +5,20 @@ import { toast } from "react-toastify";
 import { AppContext } from "../context/Appcontext";
 
 const DevelopersProfile = () => {
-  const { backendURL } = useContext(AppContext);
-  const { _id } = useParams(); 
-  const [userdata, setUserdata] = useState(null); // Initialize as null
+  const { backendURL, uniqid } = useContext(AppContext);
+  const { _id } = useParams();
+  const [userdata, setUserdata] = useState(null); 
+  const [isedit, setisedit] = useState(false)
 
-  // Fetch user profile
   const fetchUserProfile = async (_id) => {
     try {
       const { data } = await axios.get(`${backendURL}/api/user/selecteddev`, {
-        params: { _id } // Correctly pass _id as a query parameter
+        params: { _id }, 
       });
       if (data.success) {
         setUserdata(data.userdata);
       } else {
-        toast.error(data.message); // Display backend error message
+        toast.error(data.message);
       }
     } catch (error) {
       toast.error("Failed to fetch user data. Please try again.");
@@ -27,13 +27,27 @@ const DevelopersProfile = () => {
 
   useEffect(() => {
     if (_id) {
-      fetchUserProfile(_id); // Pass _id to the function
+      fetchUserProfile(_id);
     }
   }, [_id, backendURL]);
 
-  // Early return if userdata is null (loading state)
+  useEffect(() => {
+    if (uniqid === _id) {
+      setisedit(true);
+    }
+  }, [uniqid, _id]);
+
+  useEffect(() => {
+    console.log('isedit:', isedit); // This will run whenever `isedit` changes
+  }, [isedit]);
+
+
   if (!userdata) {
-    return <div>Loading...</div>; // Or a loader component if you prefer
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   return (
@@ -44,6 +58,7 @@ const DevelopersProfile = () => {
             <p className="text-4xl lg:text-6xl font-bold py-1 text-white">
               {userdata.name}
             </p>
+            
             <p className="text-lg lg:text-xl font-semibold text-gray-300 pt-3">
               {userdata.role}
             </p>
@@ -51,7 +66,9 @@ const DevelopersProfile = () => {
           <div className=" text-gray-100 flex flex-col justify-end lg:items-start items-center">
             <p className="text-base">Email:- {userdata.email}</p>
             <p className="text-base pb-5">Contact:-{userdata.phone}</p>
-            <p className="md:text-sm text-sm text-center lg:text-left ">{userdata.description}</p>
+            <p className="md:text-sm text-sm text-center lg:text-left ">
+              {userdata.description}
+            </p>
           </div>
         </div>
         <div className="mt-0 lg:mt-0 lg:ml-6 ">
@@ -77,9 +94,7 @@ const DevelopersProfile = () => {
             </div>
           ))
         ) : (
-          <p className=" text-gray-500 text-sm md:text-base flex items-center justify-center">
-           
-          </p>
+          <p className=" text-gray-500 text-sm md:text-base flex items-center justify-center"></p>
         )}
       </div>
       <div className="text-gray-300 w-full flex justify-center items-center pt-5 text-2xl font-bold">
