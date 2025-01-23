@@ -11,6 +11,7 @@ import Projects from "./pages/Projects";
 import "./App.css";
 import Login from "./pages/Login";
 import Myprofile from "./pages/Myprofile";
+import Editprofile from "./pages/Editprofile";
 
 const App = () => {
   return (
@@ -26,9 +27,9 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/developers" element={<Developers />} />
           <Route path="/developers/:_id" element={<DevelopersProfile />} />
-          <Route path="/myprofile" element={<Myprofile />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/editprofile" element={<Editprofile/>} />
         </Routes>
       </main>
 

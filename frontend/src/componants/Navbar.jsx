@@ -39,16 +39,24 @@ const Navbar = () => {
           <hr className="border-none outline-none h-0.5 bg-green-600 w-3/5 m-auto hidden" />
         </NavLink>
       </div>
-      <div className="flex gap-10 items-center justify-between">
+      <div className="flex lg:gap-32 gap-5 items-center justify-between">
         <div>
           {token ? (
             <div className="relative group">
               <div className="flex items-center md:gap-10 gap-1" >
+                {
+                  userdata ? <img
+                  src={userdata.profile_photo}
+                  alt="Profile"
+                  className="w-auto md:h-12 h-10 rounded-full"
+                />:
                 <img
                   src={assets.profile_pic}
                   alt="Profile"
                   className="w-auto md:h-12 h-10 rounded-full"
                 />
+                }
+                
               </div>
 
               <div className="rounded-lg absolute top-full mt-2 py-5 px-12  transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300 text-lg z-50">

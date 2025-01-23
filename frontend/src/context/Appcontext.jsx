@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 
 
+
 export const AppContext = createContext();
 
 const AppContextProvide = (props) => {
@@ -15,6 +16,7 @@ const AppContextProvide = (props) => {
   const [developers, setdevelopers] = useState([])
   const [userdata, setuserdata] = useState([]);
   const [uniqid, setuniqid] = useState(null)
+  const [image, setimage] = useState(false);
 
 
   //get all priojects list
@@ -41,7 +43,6 @@ const AppContextProvide = (props) => {
       const {data} = await axios.get(backendURL + "/api/user/alldevelopers")
       if(data.success){
         setdevelopers(data.developers)
-        // console.log(data.developers)
       }
       else{
         toast.error(data.error)
@@ -75,8 +76,13 @@ const AppContextProvide = (props) => {
     backendURL,
     projects,
     developers,
-    userdata, 
-    uniqid  
+    userdata,
+    setuserdata,
+    getmyprofile, 
+    uniqid ,
+    image,
+    setimage 
+    
   };
 
   useEffect(()=>{

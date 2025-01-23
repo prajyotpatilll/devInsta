@@ -1,14 +1,15 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/Appcontext";
 
 const DevelopersProfile = () => {
-  const { backendURL, uniqid } = useContext(AppContext);
+  const { backendURL, uniqid, token } = useContext(AppContext);
   const { _id } = useParams();
   const [userdata, setUserdata] = useState(null); 
   const [isedit, setisedit] = useState(false)
+  const navigate = useNavigate()
 
   const fetchUserProfile = async (_id) => {
     try {
@@ -29,16 +30,16 @@ const DevelopersProfile = () => {
     if (_id) {
       fetchUserProfile(_id);
     }
-  }, [_id, backendURL]);
+  }, [_id, backendURL,token]);
 
   useEffect(() => {
     if (uniqid === _id) {
       setisedit(true);
     }
-  }, [uniqid, _id]);
+  }, [uniqid, _id,token]);
 
   useEffect(() => {
-    console.log('isedit:', isedit); // This will run whenever `isedit` changes
+    console.log('isedit:', isedit); 
   }, [isedit]);
 
 
@@ -55,7 +56,7 @@ const DevelopersProfile = () => {
       <div className="flex flex-col-reverse lg:flex-row items-center justify-between md:border rounded-2xl lg:p-5 p-2 w-full max-w-5xl mx-auto shadow-lg ">
         <div className="flex flex-col w-full lg:w-[60%] md:p-9 p-4">
           <div className="w-full mb-4 flex flex-col justify-end lg:items-start items-center ">
-            <p className="text-4xl lg:text-6xl font-bold py-1 text-white">
+            <p className="text-4xl lg:text-5xl font-bold py-1 text-white">
               {userdata.name}
             </p>
             
@@ -73,7 +74,7 @@ const DevelopersProfile = () => {
         </div>
         <div className="mt-0 lg:mt-0 lg:ml-6 ">
           <img
-            className="w-full h-96 object-cover bg-transparent"
+            className="w-full md:h-96 h-52 object-cover bg-transparent rounded-xl"
             src={userdata.profile_photo}
             alt="photograph"
           />
@@ -97,6 +98,15 @@ const DevelopersProfile = () => {
           <p className=" text-gray-500 text-sm md:text-base flex items-center justify-center"></p>
         )}
       </div>
+      {
+        isedit ? <div  className="flex items-center justify-center">
+              <p className="border-2 text-sm sm:text-lg md:text-xl border-gray-300 px-5 sm:px-8 md:px-10 py-1 flex items-center justify-center rounded-3xl m-2 text-white-500 font-bold">
+                add skill
+              </p>
+            </div>:
+            <p></p>
+      }
+      
       <div className="text-gray-300 w-full flex justify-center items-center pt-5 text-2xl font-bold">
         Projects
       </div>
@@ -150,7 +160,19 @@ const DevelopersProfile = () => {
               No projects available.
             </div>
           )}
+
+
         </div>
+      </div>
+      <div>
+        {
+          isedit ? <button onClick={()=> navigate('/editprofile')} className="px-8 py-2 mt-5 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+          Edit
+        </button>
+         :
+          <p></p>
+        }
+        
       </div>
     </div>
   );

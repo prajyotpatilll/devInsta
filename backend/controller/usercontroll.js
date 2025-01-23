@@ -127,7 +127,7 @@ const editprofile = async (req, res) => {
         // Handle resume
         if (files?.resume) {
             try {
-                updates.resume = await uploadToCloudinary(files.resume[0], "raw"); // Assuming resume is a document
+                updates.resume = await uploadToCloudinary(files.resume[0], "image"); // Assuming resume is a document
             } catch (error) {
                 console.error("Error uploading resume:", error);
                 return res.status(500).json({
