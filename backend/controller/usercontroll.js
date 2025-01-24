@@ -317,6 +317,53 @@ const deleteProject = async (req, res) => {
     }
 };
 
+const deleteskill = async (req, res) => {
+    try {
+        const { userid, skillsid } = req.body;
+
+        if (!userid || !skillsid) {
+            return res.status(400).json({
+                success: false,
+                message: 'Missing required fields: userid or skillsid',
+            });
+        }
+
+        const user = await userModel.findById(userid);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
+
+        const skillIndex = user.skills.findIndex(
+            (skill) => skill._id.toString() === skillsid
+        );
+
+        if (skillIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: 'Skill not found',
+            });
+        }
+
+        user.skills.splice(skillIndex, 1);
+
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: 'Skill deleted successfully',
+        });
+    } catch (error) {
+        console.error('Error deleting skill:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+    }
+};
+
 const addskills = async (req, res) => {
     try {
         const { userid, skillName, skillUse } = req.body;
@@ -337,7 +384,8 @@ const addskills = async (req, res) => {
         return res.status(200).json({ message: "Skill added successfully", user });
 
     } catch (error) {
-
+        console.log(error)
+        res.json({ success: false, message: error.message })
     }
 }
 
@@ -417,4 +465,4 @@ const selecteddev = async (req, res) => {
       return res.status(500).json({ success: false, message: "Server error." });
     }
   };
-export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects, allusersprojects, alldevelopers, selecteddev };
+export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects, allusersprojects, alldevelopers, selecteddev, deleteskill };
