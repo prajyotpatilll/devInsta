@@ -12,9 +12,28 @@ const DevelopersProfile = () => {
   const [isedit, setisedit] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible11, setIsVisible11] = useState(false);
+  const [isVisible111, setIsVisible111] = useState(false);
   const [skillName, setSkillName] = useState("");
   const [skillUse, setSkillUse] = useState("");
   const navigate = useNavigate();
+
+  const fetchUserProfile = async (_id) => {
+    try {
+      const { data } = await axios.get(`${backendURL}/api/user/selecteddev`, {
+        params: { _id },
+      });
+      if (data.success) {
+        setUserdata(data.userdata);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to fetch user data. Please try again.");
+    }
+  };
+
+   //add and delete skill 
 
   const addskill = async () => {
     try {
@@ -35,21 +54,6 @@ const DevelopersProfile = () => {
         error.response?.data?.message ||
           "Failed to add skill. Please try again."
       );
-    }
-  };
-
-  const fetchUserProfile = async (_id) => {
-    try {
-      const { data } = await axios.get(`${backendURL}/api/user/selecteddev`, {
-        params: { _id },
-      });
-      if (data.success) {
-        setUserdata(data.userdata);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error("Failed to fetch user data. Please try again.");
     }
   };
 
@@ -81,11 +85,32 @@ const DevelopersProfile = () => {
     setIsVisible1(!isVisible1);
   };
 
+  // add and remove project
+  const addproject = async ()=>{
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+
+  const handleClick1 = () => {
+    setIsVisible11(!isVisible11);
+  };
+
+  const handleclick11 = () => {
+    setIsVisible111(!isVisible111);
+  };
+
+  //fetching user profile using id
+
   useEffect(() => {
     if (_id) {
       fetchUserProfile(_id);
     }
   }, [_id, backendURL, token]);
+
+  // Login user profile options
 
   useEffect(() => {
     if (uniqid === _id) {
@@ -93,10 +118,13 @@ const DevelopersProfile = () => {
     }
   }, [uniqid, _id, token]);
 
+  //testing purpose
+
   useEffect(() => {
     console.log("isedit:", isedit);
   }, [isedit]);
 
+ // loader 
   if (!userdata) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -241,6 +269,25 @@ const DevelopersProfile = () => {
         </div>
       </div>
 
+      {isedit ? (
+        <div className="flex items-center justify-center">
+          <button
+            onClick={handleClick1}
+            className=" px-5 sm:px-8 md:px-10 py-2 rounded-3xl m-2 text-white font-bold bg-blue-500 hover:bg-blue-600 transition duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 text-sm sm:text-lg md:text-xl flex items-center justify-center"
+          >
+            Add Project
+          </button>
+          <button
+            onClick={handleclick11}
+            className=" px-5 sm:px-8 md:px-10 py-2 rounded-3xl m-2 text-white font-bold bg-blue-500 hover:bg-blue-600 transition duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 text-sm sm:text-lg md:text-xl flex items-center justify-center"
+          >
+            Delete Project
+          </button>
+        </div>
+      ) : (
+        <p></p>
+      )}
+
       {isVisible && (
         <div className="absolute z-50 top-72 w-[30vw] h-[40vh] bg-white/80 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
           <input
@@ -296,6 +343,35 @@ const DevelopersProfile = () => {
           )}
           <button
             onClick={handleclick1}
+            className=" px-5 py-1 m-5 bottom-0 left-32 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
+          >
+            save
+          </button>
+        </div>
+      )}
+      {/* project add section */}
+
+      {isVisible11 && (
+        <div className="absolute z-50 top-[60rem] w-[50vw] h-[55vh] backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
+          
+          <button
+            onClick={() => {
+              {
+                handleClick1();
+                
+              }
+            }}
+            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
+          >
+            Save
+          </button>
+        </div>
+      )}
+
+      {isVisible111 && (
+        <div class="absolute z-50 top-72  backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg grid md:grid-cols-3 grid-cols-2 md:p-7 p-5">
+          <button
+            onClick={handleclick11}
             className=" px-5 py-1 m-5 bottom-0 left-32 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
           >
             save
