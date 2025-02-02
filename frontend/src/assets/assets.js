@@ -21,6 +21,7 @@ import bomb from './d12.svg'
 import raw from './d22.svg'
 import rawx from './d44.svg'
 import deleteicon from './icons8-delete.svg'
+import crossred from './crossred.svg'
 
 export const assets = {
     appointment_img,
@@ -45,6 +46,7 @@ export const assets = {
     bomb,
     raw,
     rawx,
-    deleteicon
+    deleteicon,
+    crossred
 }
 

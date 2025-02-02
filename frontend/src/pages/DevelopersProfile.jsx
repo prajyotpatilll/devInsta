@@ -33,7 +33,7 @@ const DevelopersProfile = () => {
     }
   };
 
-   //add and delete skill 
+  //add and delete skill
 
   const addskill = async () => {
     try {
@@ -86,13 +86,55 @@ const DevelopersProfile = () => {
   };
 
   // add and remove project
-  const addproject = async ()=>{
+  const [projectData, setProjectData] = useState({
+    name: "",
+    technologies: "",
+    github_link: "",
+    live_preview_link: "",
+    photo: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProjectData({ ...projectData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setProjectData({ ...projectData, photo: e.target.files[0] });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", projectData.name);
+    formData.append("technologies", projectData.technologies);
+    formData.append("github_link", projectData.github_link);
+    formData.append("live_preview_link", projectData.live_preview_link);
+    formData.append("photo", projectData.photo);
     try {
-      
+      const response = await axios.post(
+        `${backendURL}/api/user/addproject`,
+        formData,
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setProjectData({
+          name: "",
+          technologies: "",
+          github_link: "",
+          live_preview_link: "",
+          photo: null,
+        });
+        await fetchUserProfile(_id);
+      } else {
+        toast.error("Project not added!");
+      }
     } catch (error) {
-      
+      toast.error("project not adding");
     }
-  }
+  };
 
   const handleClick1 = () => {
     setIsVisible11(!isVisible11);
@@ -101,6 +143,14 @@ const DevelopersProfile = () => {
   const handleclick11 = () => {
     setIsVisible111(!isVisible111);
   };
+
+  const deleteproject = async (pid)=>{
+    try {
+      
+    } catch (error) {
+      toast.error("project not deleted")
+    }
+  }
 
   //fetching user profile using id
 
@@ -124,7 +174,7 @@ const DevelopersProfile = () => {
     console.log("isedit:", isedit);
   }, [isedit]);
 
- // loader 
+  // loader
   if (!userdata) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -225,6 +275,14 @@ const DevelopersProfile = () => {
                 key={item._id}
                 className="border rounded-xl border-gray-400 p-3 overflow-hidden bg-[#525676] transition-transform transform hover:scale-95"
               >
+                {isedit ? (
+                  <button className="absolute right-1 bg-transparent rounded-full  top-2  px-3 py-1  shadow-md transition-all duration-300">
+                    <img className="rounded-full bg-transparent w-8 h-auto " src={assets.crossred} alt="" srcset="" />
+                  </button>
+                ) : (
+                  <div></div>
+                )}
+
                 {item.photo && (
                   <img
                     src={item.photo}
@@ -277,12 +335,7 @@ const DevelopersProfile = () => {
           >
             Add Project
           </button>
-          <button
-            onClick={handleclick11}
-            className=" px-5 sm:px-8 md:px-10 py-2 rounded-3xl m-2 text-white font-bold bg-blue-500 hover:bg-blue-600 transition duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 text-sm sm:text-lg md:text-xl flex items-center justify-center"
-          >
-            Delete Project
-          </button>
+          
         </div>
       ) : (
         <p></p>
@@ -353,31 +406,81 @@ const DevelopersProfile = () => {
 
       {isVisible11 && (
         <div className="absolute z-50 top-[60rem] w-[50vw] h-[55vh] backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
-          
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4"
+            encType="multipart/form-data"
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Project Name"
+              value={projectData.name}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+            <input
+              type="text"
+              name="technologies"
+              placeholder="Technologies (comma-separated)"
+              value={projectData.technologies}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+            <input
+              type="url"
+              name="github_link"
+              placeholder="GitHub Link"
+              value={projectData.github_link}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+            <input
+              type="url"
+              name="live_preview_link"
+              placeholder="Live Preview Link (optional)"
+              value={projectData.live_preview_link}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+            />
+            <input
+              type="file"
+              name="photo"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+            >
+              Submit
+            </button>
+          </form>
+
           <button
             onClick={() => {
               {
                 handleClick1();
-                
               }
             }}
-            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
+            className=" absolute right-0 top-0 px-6 py-2  font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 transition duration-200"
           >
-            Save
+            <img
+              className="w-10 h-auto"
+              src={assets.crossred}
+              alt=""
+              srcset=""
+            />
           </button>
         </div>
       )}
 
-      {isVisible111 && (
-        <div class="absolute z-50 top-72  backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg grid md:grid-cols-3 grid-cols-2 md:p-7 p-5">
-          <button
-            onClick={handleclick11}
-            className=" px-5 py-1 m-5 bottom-0 left-32 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
-          >
-            save
-          </button>
-        </div>
-      )}
+      
     </div>
   );
 };
