@@ -12,6 +12,7 @@ import adminroute from "../routes/adminroute.js"
 // import doctorrouter from "../routes/doctorroute.js"
 
 
+
 const app = express()
 const port = process.env.PORT || 4000
 conectDB()
