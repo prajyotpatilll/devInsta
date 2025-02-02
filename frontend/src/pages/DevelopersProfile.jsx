@@ -146,9 +146,18 @@ const DevelopersProfile = () => {
 
   const deleteproject = async (pid)=>{
     try {
-      
+      const response = await axios.post(`${backendURL}/api/user/deleteproject`, { projectId: pid },
+        { headers: { token } } )
+
+        if (response.data.success) {
+          toast.success("project deleted successfully.");
+        } else {
+          toast.error(response.data.message || "Failed to delete skill.");
+        }
+        await fetchUserProfile(_id);
+        
     } catch (error) {
-      toast.error("project not deleted")
+      toast.error("Failed to delete skill. Please try again.");
     }
   }
 
@@ -276,8 +285,8 @@ const DevelopersProfile = () => {
                 className="border rounded-xl border-gray-400 p-3 overflow-hidden bg-[#525676] transition-transform transform hover:scale-95"
               >
                 {isedit ? (
-                  <button className="absolute right-1 bg-transparent rounded-full  top-2  px-3 py-1  shadow-md transition-all duration-300">
-                    <img className="rounded-full bg-transparent w-8 h-auto " src={assets.crossred} alt="" srcset="" />
+                  <button onClick={()=>deleteproject(item._id)} className="absolute right-1 bg-transparent rounded-full  top-2  px-3 py-1  shadow-md transition-all duration-300">
+                    <img className="rounded-full bg-transparent w-8 h-auto " src={assets.crossred} alt=""  />
                   </button>
                 ) : (
                   <div></div>
@@ -371,7 +380,7 @@ const DevelopersProfile = () => {
       )}
 
       {isVisible1 && (
-        <div class="absolute z-50 top-72  backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg grid md:grid-cols-3 grid-cols-2 md:p-7 p-5">
+        <div className="absolute z-50 top-72  backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg grid md:grid-cols-3 grid-cols-2 md:p-7 p-5">
           {userdata.skills && userdata.skills.length > 0 ? (
             userdata.skills.map((item, index) => (
               <div
@@ -474,7 +483,7 @@ const DevelopersProfile = () => {
               className="w-10 h-auto"
               src={assets.crossred}
               alt=""
-              srcset=""
+              
             />
           </button>
         </div>
