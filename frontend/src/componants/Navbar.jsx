@@ -3,11 +3,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/Appcontext";
 import { assets } from "../assets/assets.js";
 const Navbar = () => {
-  const {token, settoken, userdata} = useContext(AppContext)
+  const { token, settoken, userdata } = useContext(AppContext);
   const navigate = useNavigate();
 
   //testing purpose
-  
+
   const logout = () => {
     settoken(false);
     localStorage.removeItem("token");
@@ -15,7 +15,13 @@ const Navbar = () => {
 
   return (
     <div className=" lg:p-6 md:px-16 px-3 flex justify-between items-center w-[100vw]  min-h-[10vh] lg:justify-around">
-      <div onClick={()=>{navigate('/');window.scrollTo(0, 0)}} className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-extrabold text-[#f84f39]  bg-transparent flex justify-center cursor-pointer">
+      <div
+        onClick={() => {
+          navigate("/");
+          window.scrollTo(0, 0);
+        }}
+        className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-extrabold text-[#f84f39]  bg-transparent flex justify-center cursor-pointer"
+      >
         <span className="text-[#2a966f] bg-transparent ">&lt;</span>DevInsta
         <span className="text-[#2a966f] bg-transparent">/&gt;</span>
       </div>
@@ -43,26 +49,26 @@ const Navbar = () => {
         <div>
           {token ? (
             <div className="relative group">
-              <div className="flex items-center md:gap-10 gap-1" >
-                {
-                  userdata ? <img
-                  src={userdata.profile_photo}
-                  alt="Profile"
-                  className="w-auto md:h-12 h-10 rounded-full"
-                />:
-                <img
-                  src={assets.profile_pic}
-                  alt="Profile"
-                  className="w-auto md:h-12 h-10 rounded-full"
-                />
-                }
-                
+              <div className="flex items-center md:gap-10 gap-1">
+                {userdata ? (
+                  <img
+                    src={userdata.profile_photo}
+                    alt="Profile"
+                    className="w-10 md:w-12 md:h-12 h-10 rounded-full"
+                  />
+                ) : (
+                  <img
+                    src={assets.profile_pic}
+                    alt="Profile"
+                    className="w-auto md:h-12 h-10 rounded-full"
+                  />
+                )}
               </div>
 
-              <div className="rounded-lg absolute top-full mt-2 py-5 px-12  transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300 text-lg z-50">
+              <div className="rounded-lg absolute -right-10 mt-2 py-5 px-8  transform -translate-x-1/2 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300 text-lg z-40">
                 <p
                   className="mb-4 cursor-pointer bg-transparent"
-                  onClick={()=>navigate(`/developers/${userdata._id}`)}
+                  onClick={() => navigate(`/developers/${userdata._id}`)}
                 >
                   Profile
                 </p>
@@ -79,7 +85,7 @@ const Navbar = () => {
             </div>
           ) : (
             <button
-              onClick={() => navigate('/login')}
+              onClick={() => navigate("/login")}
               className="relative bg-green-600 text-lg px-6 py-2 my-0.5 rounded-full hover:bg-green-700 transition duration-300"
             >
               SIGN UP
@@ -93,7 +99,7 @@ const Navbar = () => {
             <span className="w-9 md:h-1 h-0.5 bg-gray-300 rounded"></span>
 
             {/* Dropdown options */}
-            <div className="absolute top-full  w-full h-[20vh] mt-2 py-5 px-20 -left-10 transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-evenly items-center text-white transition-opacity duration-300 text-lg z-50 rounded-xl">
+            <div className="absolute top-full   w-full h-[20vh] mt-2 py-5 px-16 left-0 transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-evenly items-center text-white transition-opacity duration-300 text-lg z-40 rounded-xl">
               <p
                 className="mb-2 cursor-pointer bg-transparent"
                 onClick={() => navigate("./")}

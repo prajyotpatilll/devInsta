@@ -5,7 +5,7 @@ const HomeBanner = () => {
   return (
     <div className="relative flex lg:flex-row flex-col items-center lg:justify-between justify-start text-center  text-white h-auto pt-5 md:pt-20  lg:pt-0 lg:min-h-[90vh] overflow-hidden ">
       
-      <div className="lg:absolute relative right-0 rounded-md">
+      <div className="lg:absolute sm:block relative right-0 rounded-md hidden">
         <video
           src={assets.video}
           autoPlay

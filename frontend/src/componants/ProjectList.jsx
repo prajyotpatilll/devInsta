@@ -9,54 +9,54 @@ const ProjectList = () => {
 
   return (
     <div className="container flex flex-col items-center justify-center mx-auto md:p-20 p-5 max-h-auto max-w-[100vw] ">
-      
-       
-       {/* demo */}
-       <div className="flex flex-col items-start justify-center ">
+      {/* demo */}
+      <div className="flex flex-col items-start justify-center ">
         <div>
           <img className="py-5" src={assets.raw} alt="" />
         </div>
         <div className="flex">
-          <h2 className="lg:text-5xl md:text-4xl text-2xl sm:text-3xl font-bold md:pb-3 pb-1">Discover innovative</h2>
+          <h2 className="lg:text-5xl md:text-4xl text-2xl sm:text-3xl font-bold md:pb-3 pb-1">
+            Discover innovative
+          </h2>
           <h2 className="lg:text-5xl md:text-4xl text-2xl sm:text-3xl font-bold md:pb-3 pb-1 pl-3 text-gray-500">
-          Creations
+            Creations
           </h2>
         </div>
 
         <h2 className="lg:text-5xl md:text-4xl text-2xl sm:text-3xl font-bold  text-gray-500">
-        from developers around the world.
+          from developers around the world.
         </h2>
       </div>
 
-       {/* demo */}
-      
+      {/* demo */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6 py-16">
-        {projects.slice(0,10).map((item) =>
-          item.projects.slice(0, 10).map((project)  => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 2xl:p-20 p-5">
+        {projects.slice(0, 10).map((item) =>
+          item.projects.slice(0, 10).map((project) => (
             <div
               key={project._id}
-              className=" border rounded-xl border-gray-400 p-3 overflow-hidden bg-[#525676] transition-transform transform hover:scale-95"
+              className="border rounded-xl border-gray-400 p-3 bg-[#525676] transition-transform transform hover:scale-95 flex flex-col"
             >
               {project.photo && (
                 <img
                   src={project.photo}
                   alt={project.name}
-                  className="w-full h-40 object-cover rounded-lg bg-[#525676]"
+                  className="w-full h-44 object-cover rounded-lg"
                 />
               )}
-              <div className="p-4 bg-[#525676]">
-                <h3 className="text-lg font-semibold mb-2 bg-[#525676]">{project.name}</h3>
-                <p className="mb-2 bg-[#525676]">
-                  <strong className="bg-[#525676]" >Technologies:</strong>{" "}
-                  {project.technologies.join(", ")}
+              <div className="flex flex-col justify-between flex-grow p-4 bg-transparent">
+                <h3 className="text-xl font-semibold mb-2 bg-transparent">{project.name}</h3>
+                <h4 className="font-bold bg-transparent">Technologies:</h4>
+                <p className="w-full text-sm mb-3 bg-transparent overflow-scroll">
+                  
+                 {project.technologies}
                 </p>
-                <div className="flex gap-1 bg-[#525676]">
+                <div className="flex gap-2 mt-auto bg-transparent">
                   <a
                     href={project.github_link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#2590f2] text-white py-2 px-3 rounded hover:bg-blue-600 transition"
+                    className="bg-[#2590f2] text-white py-2 px-3 rounded hover:bg-blue-600 transition text-center flex-1"
                   >
                     GitHub
                   </a>
@@ -64,7 +64,7 @@ const ProjectList = () => {
                     href={project.live_preview_link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-[#2a966f] text-white py-2 px-4 rounded hover:bg-green-700 transition"
+                    className="bg-[#2a966f] text-white py-2 px-4 rounded hover:bg-green-700 transition text-center flex-1"
                   >
                     Live Preview
                   </a>
