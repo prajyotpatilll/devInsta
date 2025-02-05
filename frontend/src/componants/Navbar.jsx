@@ -14,7 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" lg:p-6 md:px-16 px-3 flex justify-between items-center w-[100vw]  min-h-[10vh] lg:justify-around">
+    <div className=" lg:p-6 md:px-16 px-8 flex justify-between items-center w-[100vw]  min-h-[10vh] lg:justify-around">
       <div
         onClick={() => {
           navigate("/");
@@ -99,7 +99,7 @@ const Navbar = () => {
             <span className="w-9 md:h-1 h-0.5 bg-gray-300 rounded"></span>
 
             {/* Dropdown options */}
-            <div className="absolute top-full   w-full h-[20vh] mt-2 py-5 px-16 left-0 transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-evenly items-center text-white transition-opacity duration-300 text-lg z-40 rounded-xl">
+            <div className="absolute top-full   w-full h-[20vh] mt-2 py-5 px-14 left-0 transform -translate-x-1/2 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 flex flex-col justify-evenly items-center text-white transition-opacity duration-300 text-lg z-40 rounded-xl">
               <p
                 className="mb-2 cursor-pointer bg-transparent"
                 onClick={() => navigate("./")}
