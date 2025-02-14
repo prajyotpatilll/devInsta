@@ -34,6 +34,11 @@ const ProjectList = () => {
         {projects.slice(0, 10).map((item) =>
           item.projects.slice(0, 10).map((project) => (
             <div
+            onClick={() => {
+              navigate(`/developers/${item._id}`);
+              window.scrollTo(0, 0);
+            }}
+            
               key={project._id}
               className="border rounded-xl border-gray-400 p-3 bg-[#525676] transition-transform transform hover:scale-95 flex flex-col"
             >

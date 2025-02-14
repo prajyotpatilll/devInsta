@@ -29,9 +29,7 @@ const HomeBanner = () => {
 
         <div className="md:text-base text-sm flex  max-w-xl mx-auto text-gray-400 mt-8 bg-transparent">
           DevInsta is a platform designed for developers to showcase their
-          projects and skills. It provides the tools you need to create a
-          professional profile and share your latest projects with the tech
-          community.
+          projects and skills. a platform where developers can build a strong portfolio in one place! 🔥
         </div>
       </div>
     </div>

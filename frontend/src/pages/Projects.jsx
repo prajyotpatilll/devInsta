@@ -6,7 +6,7 @@ const Projects = () => {
   const { projects } = useContext(AppContext);
   const navigate = useNavigate();
   return (
-    <div className="container flex flex-col items-start justify-center mx-auto pt-5 max-h-auto">
+    <div className="container flex flex-col items-start justify-center mx-auto p-5 max-h-auto">
       <div className="flex items-center justify-center mb-6 pt-5">
         <h2 className="text-3xl md:text-4xl font-bold">Discover</h2>
         <h2 className="text-3xl md:text-4xl font-bold pl-4 text-gray-500">Projects</h2>
@@ -17,6 +17,10 @@ const Projects = () => {
         {projects.slice(0, 10).map((item) =>
           item.projects.slice(0, 10).map((project) => (
             <div
+            onClick={() => {
+              navigate(`/developers/${item._id}`);
+              window.scrollTo(0, 0);
+            }}
               key={project._id}
               className="border rounded-xl border-gray-400 p-3 bg-[#525676] transition-transform transform hover:scale-95 flex flex-col"
             >

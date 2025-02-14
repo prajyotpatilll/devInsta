@@ -86,7 +86,7 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => navigate("/login")}
-              className="relative bg-green-600 text-lg px-6 py-2 my-0.5 rounded-full hover:bg-green-700 transition duration-300"
+              className="relative bg-green-600  px-6 py-2 my-0.5 rounded-full text-sm hover:bg-green-700 transition duration-300"
             >
               SIGN UP
             </button>

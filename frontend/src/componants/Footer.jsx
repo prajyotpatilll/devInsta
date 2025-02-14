@@ -62,7 +62,7 @@ const Footer = () => {
         <div className="md:flex items-start flex-col hidden">
           <p className="text-lg font-bold text-[#8782ee] ">Updates</p>
           <div className=" w-60 p-6 bg-[#20202e] rounded-xl mt-5">
-            <p className="text-gray-500 bg-[#20202e] pb-3">version 0.01.0</p>
+            <p className="text-gray-500 bg-[#20202e] pb-3">Beta v0.00.01</p>
             <p className="text-xl font-bold bg-[#20202e]">Project was in</p>
             <p className="text-xl font-bold bg-[#20202e]">Beta phase</p>
             <p className="text-sm font-light bg-[#20202e] pt-3">13/01/2025</p>
