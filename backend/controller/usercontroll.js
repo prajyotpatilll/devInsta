@@ -2,8 +2,8 @@ import validator from "validator"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { v2 as cloudinary } from "cloudinary"
-
 import userModel from "../models/usermodel.js"
+import nodemailer from "nodemailer"
 
 const registerUser = async (req, res) => {
     try {
@@ -465,4 +465,31 @@ const selecteddev = async (req, res) => {
       return res.status(500).json({ success: false, message: "Server error." });
     }
   };
-export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects, allusersprojects, alldevelopers, selecteddev, deleteskill };
+
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER, // DevInsta email
+      pass: process.env.EMAIL_PASS, // App Password
+    },
+  });
+  
+
+ const contact = async (req, res) => {
+    const { name, email, message, developerEmail } = req.body;
+  
+    try {
+      await transporter.sendMail({
+        from: `"DevInsta" <${process.env.EMAIL_USER}>`,
+        to: developerEmail,
+        subject: `New Message from ${name} via DevInsta`,
+        text: `Hello,\n\nYou have a new message.\n\n👤 Name: ${name}\n📧 Email: ${email}\n✉️ Message: "${message}"\n\nReply to ${email} directly.`,
+      });
+  
+      res.json({ success: true, message: "Message sent!" });
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Failed to send email" });
+    }
+  };
+export { registerUser, loginUser, editprofile, getprofile, addproject, editProject, deleteProject, addskills, showskills, showAllProjects, allusersprojects, alldevelopers, selecteddev, deleteskill, contact };

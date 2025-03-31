@@ -22,6 +22,9 @@ import raw from './d22.svg'
 import rawx from './d44.svg'
 import deleteicon from './icons8-delete.svg'
 import crossred from './crossred.svg'
+import github from './github.png'
+import insta from './instagram.png'
+import linkdin from './linkedin.png'
 
 export const assets = {
     appointment_img,
@@ -47,6 +50,9 @@ export const assets = {
     raw,
     rawx,
     deleteicon,
-    crossred
+    crossred,
+    github,
+    insta,
+    linkdin
 }
 

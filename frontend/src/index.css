@@ -11,6 +11,7 @@
     color: #fff;
     background-color: #191b2b;
     user-select: none;
+    scroll-behavior: smooth;
 }
 
 .active hr{

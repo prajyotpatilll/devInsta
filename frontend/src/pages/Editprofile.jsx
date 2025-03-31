@@ -25,10 +25,8 @@ const Editprofile = () => {
       formData.append("dob", userdata.dob || "");
       formData.append("role", userdata.role || "");
       formData.append("description", userdata.description || "");
-      
-      if (image) formData.append("profile_photo", image);
-      
 
+      if (image) formData.append("profile_photo", image);
 
       const { data } = await axios.post(
         backendURL + "/api/user/editprofile",
@@ -39,7 +37,6 @@ const Editprofile = () => {
       if (data.success) {
         toast.success(data.message);
         await getmyprofile();
-        
       } else {
         toast.error(data.message);
       }
@@ -68,7 +65,9 @@ const Editprofile = () => {
 
       <div className="space-y-4">
         <div>
-          <label className="block text-base text-gray-300 font-medium ">Name</label>
+          <label className="block text-base text-gray-300 font-medium ">
+            Name
+          </label>
           <input
             type="text"
             value={userdata.name || ""}
@@ -80,7 +79,9 @@ const Editprofile = () => {
         </div>
 
         <div>
-          <label className="block  font-medium text-base text-gray-300">Phone</label>
+          <label className="block  font-medium text-base text-gray-300">
+            Phone
+          </label>
           <input
             type="text"
             value={userdata.phone || ""}
@@ -92,7 +93,9 @@ const Editprofile = () => {
         </div>
 
         <div>
-          <label className="block text-base font-medium text-gray-300">Gender</label>
+          <label className="block text-base font-medium text-gray-300">
+            Gender
+          </label>
           <select
             value={userdata.gender || "Male"}
             onChange={(e) =>
@@ -106,7 +109,9 @@ const Editprofile = () => {
         </div>
 
         <div>
-          <label className="block text-base font-medium text-gray-300">Role</label>
+          <label className="block text-base font-medium text-gray-300">
+            Role
+          </label>
           <select
             value={userdata.role || "Frontend Developer"}
             onChange={(e) =>
@@ -122,37 +127,51 @@ const Editprofile = () => {
             <option value="Data Scientist">Data Scientist</option>
             <option value="Data Analyst">Data Analyst</option>
             <option value="Cloud Engineer">Cloud Engineer</option>
-            <option value="Cybersecurity Specialist">Cybersecurity Specialist</option>
+            <option value="Cybersecurity Specialist">
+              Cybersecurity Specialist
+            </option>
             <option value="AI/ML Engineer">AI/ML Engineer</option>
             <option value="Mobile App Developer">Mobile App Developer</option>
             <option value="Game Developer">Game Developer</option>
-            <option value="Database Administrator">Database Administrator</option>
+            <option value="Database Administrator">
+              Database Administrator
+            </option>
             <option value="IT Support Specialist">IT Support Specialist</option>
             <option value="Systems Administrator">Systems Administrator</option>
             <option value="Network Engineer">Network Engineer</option>
-            <option value="Quality Assurance Engineer">Quality Assurance Engineer</option>
+            <option value="Quality Assurance Engineer">
+              Quality Assurance Engineer
+            </option>
             <option value="Software Engineer">Software Engineer</option>
             <option value="Technical Writer">Technical Writer</option>
             <option value="IT Project Manager">IT Project Manager</option>
             <option value="Scrum Master">Scrum Master</option>
             <option value="Business Analyst">Business Analyst</option>
             <option value="IT Consultant">IT Consultant</option>
-            <option value="Embedded Systems Developer">Embedded Systems Developer</option>
+            <option value="Embedded Systems Developer">
+              Embedded Systems Developer
+            </option>
             <option value="Blockchain Developer">Blockchain Developer</option>
             <option value="Ethical Hacker">Ethical Hacker</option>
             <option value="AR/VR Developer">AR/VR Developer</option>
             <option value="IoT Engineer">IoT Engineer</option>
             <option value="Big Data Engineer">Big Data Engineer</option>
             <option value="Product Manager">Product Manager</option>
-            <option value="Technical Support Engineer">Technical Support Engineer</option>
+            <option value="Technical Support Engineer">
+              Technical Support Engineer
+            </option>
             <option value="Solutions Architect">Solutions Architect</option>
-            <option value="Site Reliability Engineer">Site Reliability Engineer</option>
+            <option value="Site Reliability Engineer">
+              Site Reliability Engineer
+            </option>
             <option value="IT Trainer">IT Trainer</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-base font-medium text-gray-300">Date of Birth</label>
+          <label className="block text-base font-medium text-gray-300">
+            Date of Birth
+          </label>
           <input
             type="date"
             value={userdata.dob || ""}
@@ -164,15 +183,27 @@ const Editprofile = () => {
         </div>
 
         <div>
-          <label className="block text-base font-medium text-gray-300">Description</label>
+          <label className="block text-base font-medium text-gray-300">
+            Description
+          </label>
           <textarea
             className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             rows="4"
+            maxLength={100} // Limits input to 100 characters
             value={userdata.description || ""}
-            onChange={(e) =>
-              setuserdata((prev) => ({ ...prev, description: e.target.value }))
-            }
+            onChange={(e) => {
+              if (e.target.value.length <= 100) {
+                setuserdata((prev) => ({
+                  ...prev,
+                  description: e.target.value,
+                }));
+              }
+            }}
           ></textarea>
+          <p className="text-sm text-gray-500">
+            {userdata.description.length}/400 
+          </p>{" "}
+          {/* Shows character count */}
         </div>
 
         <button

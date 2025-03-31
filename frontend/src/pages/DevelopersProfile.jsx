@@ -185,6 +185,35 @@ const DevelopersProfile = () => {
     console.log("isedit:", isedit);
   }, [isedit]);
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  // Developer's email (already available on the page)
+  const developerEmail = userdata?.email || ""; // Safe fallback // Replace with actual email
+
+  const handleChange1 = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit1 = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`${backendURL}/api/user/contact`, {
+        ...formData,
+        developerEmail,
+      });
+
+      toast("Message Sent!");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      toast.message("Failed to send message.");
+    }
+  };
+
   // loader
   if (!userdata) {
     return (
@@ -195,29 +224,98 @@ const DevelopersProfile = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg w-[100vw]">
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-between md:border rounded-2xl lg:p-5 p-2 w-full max-w-5xl mx-auto shadow-lg ">
-        <div className="flex flex-col w-full lg:w-[60%] md:p-9 p-4">
-          <div className="w-full mb-4 flex flex-col justify-end lg:items-start items-center ">
-            <p className="text-4xl lg:text-5xl font-bold py-1 text-white">
-              {userdata.name}
+    <div className="flex flex-col items-center justify-center rounded-lg ">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-20 rounded-2xl mx-auto shadow-lg w-[100vw] ">
+        <div className="flex flex-col">
+          <div className=" mb-4 flex flex-col justify-end lg:items-start items-center ">
+            <p className="text-6xl lg:text-8xl font-bold pb-10 text-[#847fe7]">
+              _____
+            </p>
+            <p className="text-6xl lg:text-6xl font-extrabold pb-6 text-white">
+              Nice to meet you,
+            </p>
+            <p className="text-6xl lg:text-6xl font-extrabold pb-5 text-white">
+              I'm {userdata.name}
             </p>
 
-            <p className="text-lg lg:text-xl font-semibold text-gray-300 pt-3">
+            <p className=" lg:text-2xl font-black text-gray-300 pb-5">
               {userdata.role}
             </p>
           </div>
-          <div className=" text-gray-100 flex flex-col justify-end lg:items-start items-center">
-            <p className="text-base">Email:- {userdata.email}</p>
-            <p className="text-base pb-5">Contact:-{userdata.phone}</p>
-            <p className="md:text-sm text-sm text-center lg:text-left ">
+          <div className=" text-gray-300 flex flex-col justify-end lg:items-start items-center">
+            {/* <p className="text-base">Email:- {userdata.email}</p>
+            <p className="text-base pb-5">Contact:-{userdata.phone}</p> */}
+            <p className="text-base w-[50rem] text-gray-300 ">
               {userdata.description}
             </p>
+            <p className=" text-2xl font-bold  text-gray-600">
+              ___________________________________________________________
+            </p>
+            <div className="py-5 flex gap-28">
+              <div className="flex items-center">
+                <div className="flex text-7xl font-bold pr-3">
+                  <p className="font-bold ">1.5</p>
+                  <p className="text-[#f84f39] pl-1 text-5xl font-bold">+</p>
+                </div>
+                <div className="text-xl font-bold">
+                  <p>Years of</p>
+                  <p>exprience</p>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center">
+                  <div className="flex text-7xl font-bold pr-3">
+                    <p className="font-bold ">{userdata.projects.length}</p>
+                    <p className="text-[#f84f39] pl-1 text-5xl font-bold">+</p>
+                  </div>
+                  <div className="text-xl font-bold">
+                    <p>Successful</p>
+                    <p>projects</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex w-[100%] justify-start gap-20 py-10">
+              <a
+                href="https://www.linkedin.com/in/prajyotpatil2744/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className="rounded-full w-10 h-10 bg-transparent"
+                  src={assets.linkdin}
+                  alt="LinkedIn"
+                />
+              </a>
+              <a
+                href="https://www.instagram.com/prajyotpatilll/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className="rounded-full w-10 h-10 bg-transparent"
+                  src={assets.insta}
+                  alt="LinkedIn"
+                />
+              </a>
+              <a
+                href="https://github.com/prajyotpatilll"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className="rounded-full w-10 h-10 bg-white p-1"
+                  src={assets.github}
+                  alt="LinkedIn"
+                />
+              </a>
+            </div>
           </div>
         </div>
-        <div className="mt-0 lg:mt-0 lg:ml-6 ">
+        <div>
           <img
-            className="w-52  md:h-96 md:w-96 h-52 object-cover bg-transparent rounded-xl"
+            className="rounded-full w-[30rem] h-[30rem]"
             src={userdata.profile_photo}
             alt="photograph"
           />
@@ -236,12 +334,11 @@ const DevelopersProfile = () => {
         )}
       </div>
 
-      {/* 
-      <div className="text-gray-300 w-full flex justify-center items-center pt-5 text-2xl font-bold">
-        Skills
-      </div> */}
+      <div className="text-6xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center py-16 ">
+        Skills <span className="text-[#2a966f]">.</span>
+      </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 m-6">
+      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 pb-10">
         {userdata.skills && userdata.skills.length > 0 ? (
           userdata.skills.map((item, index) => (
             <div key={index} className="flex items-center justify-center">
@@ -274,8 +371,8 @@ const DevelopersProfile = () => {
         <p></p>
       )}
 
-      <div className="text-gray-300 w-full flex justify-center items-center pt-5 text-2xl font-bold">
-        Projects
+      <div className="text-6xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center pt-12 ">
+        Projects <span className="text-[#f84f39]">.</span>
       </div>
 
       <div>
@@ -355,6 +452,93 @@ const DevelopersProfile = () => {
         <p></p>
       )}
 
+      <div className="text-6xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center pt-20 ">
+        Let's work together <span className="text-[#847fe7]">.</span>
+      </div>
+
+      <div className="flex py-20 justify-center items-start gap-10">
+        <div className="w-[25vw]">
+          <p className="text-3xl font-bold pb-5">Get in touch with me</p>
+          <p className="text-lg font-bold text-gray-400">
+            "Let's connect! Whether you have a project idea, a question, or just
+            want to say hello, I'd love to hear from you. Fill out the form
+            below with your details, and I’ll respond as soon as possible."
+          </p>
+          <div className="flex gap-10 py-10">
+            <a
+              href="https://www.linkedin.com/in/prajyotpatil2744/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="rounded-full w-10 h-10 bg-transparent"
+                src={assets.linkdin}
+                alt="LinkedIn"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/prajyotpatilll/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="rounded-full w-10 h-10 bg-transparent"
+                src={assets.insta}
+                alt="LinkedIn"
+              />
+            </a>
+            <a
+              href="https://github.com/prajyotpatilll"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="rounded-full w-10 h-10 bg-white p-1"
+                src={assets.github}
+                alt="LinkedIn"
+              />
+            </a>
+          </div>
+        </div>
+        <div>
+          <form
+            onSubmit={handleSubmit1}
+            className=" p-10 rounded-2xl shadow-md w-full max-w-md space-y-4 py-20 px-10  bg-slate-600"
+          >
+            <input
+              name="name"
+              placeholder="Your Name"
+              onChange={handleChange1}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+
+            <input
+              name="email"
+              placeholder="Your Email"
+              onChange={handleChange1}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              onChange={handleChange1}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none h-44"
+            />
+
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-all duration-300"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+
       {isVisible && (
         <div className="absolute z-50 -bottom-14 md:bottom-24 xl:w-[30vw] md:h-[40vh] h-auto w-[90vw] bg-white/80 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
           <input
@@ -389,7 +573,11 @@ const DevelopersProfile = () => {
             }}
             className=" absolute right-0 top-0   font-semibold rounded-lg"
           >
-            <img className="md:w-10 w-6 h-auto bg-transparent" src={assets.crossred} alt="" />
+            <img
+              className="md:w-10 w-6 h-auto bg-transparent"
+              src={assets.crossred}
+              alt=""
+            />
           </button>
         </div>
       )}
