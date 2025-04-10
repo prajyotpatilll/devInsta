@@ -225,102 +225,126 @@ const DevelopersProfile = () => {
 
   return (
     <div className="flex flex-col items-center justify-center rounded-lg ">
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-20 rounded-2xl mx-auto shadow-lg w-[100vw] ">
-        <div className="flex flex-col">
-          <div className=" mb-4 flex flex-col justify-end lg:items-start items-center ">
-            <p className="text-6xl lg:text-8xl font-bold pb-10 text-[#847fe7]">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-center md:gap-10 gap-0 lg:gap-20 rounded-2xl mx-auto shadow-lg px-4 md:py-10 py-1 w-full max-w-screen-xl">
+        <div className="flex flex-col w-full lg:w-1/2 items-center lg:items-start">
+          <div className="mb-6 text-center lg:text-left">
+            <p className="text-4xl sm:text-5xl lg:text-7xl font-bold pb-6 text-[#847fe7]">
               _____
             </p>
-            <p className="text-6xl lg:text-6xl font-extrabold pb-6 text-white">
+            <p className="text-3xl sm:text-4xl lg:text-6xl font-extrabold pb-3 text-white">
               Nice to meet you,
             </p>
-            <p className="text-6xl lg:text-6xl font-extrabold pb-5 text-white">
+            <p className="text-3xl sm:text-4xl lg:text-6xl font-extrabold pb-3 text-white">
               I'm {userdata.name}
             </p>
-
-            <p className=" lg:text-2xl font-black text-gray-300 pb-5">
+            <p className="text-lg sm:text-xl lg:text-2xl font-black text-gray-300 md:pb-5 pb-0">
               {userdata.role}
             </p>
           </div>
-          <div className=" text-gray-300 flex flex-col justify-end lg:items-start items-center">
-            {/* <p className="text-base">Email:- {userdata.email}</p>
-            <p className="text-base pb-5">Contact:-{userdata.phone}</p> */}
-            <p className="text-base w-[50rem] text-gray-300 ">
+
+          <div className="text-center lg:text-left">
+            <p className="text-sm sm:text-base text-gray-300 border-b-2 border-gray-500 pb-5 max-w-md sm:max-w-lg md:max-w-xl">
               {userdata.description}
             </p>
-            <p className=" text-2xl font-bold  text-gray-600">
-              ___________________________________________________________
-            </p>
-            <div className="py-5 flex gap-28">
-              <div className="flex items-center">
-                <div className="flex text-7xl font-bold pr-3">
-                  <p className="font-bold ">1.5</p>
-                  <p className="text-[#f84f39] pl-1 text-5xl font-bold">+</p>
-                </div>
-                <div className="text-xl font-bold">
-                  <p>Years of</p>
-                  <p>exprience</p>
-                </div>
-              </div>
+          </div>
 
-              <div>
-                <div className="flex items-center">
-                  <div className="flex text-7xl font-bold pr-3">
-                    <p className="font-bold ">{userdata.projects.length}</p>
-                    <p className="text-[#f84f39] pl-1 text-5xl font-bold">+</p>
-                  </div>
-                  <div className="text-xl font-bold">
-                    <p>Successful</p>
-                    <p>projects</p>
-                  </div>
-                </div>
+          <div className="py-6 flex flex-col sm:flex-row items-center justify-between w-full max-w-md sm:max-w-lg md:max-w-xl gap-6 sm:gap-10">
+            <div className="flex items-center">
+              <div className="flex text-4xl sm:text-5xl font-bold pr-3">
+                <p>1.5</p>
+                <p className="text-[#f84f39] pl-1 text-2xl sm:text-4xl font-bold">
+                  +
+                </p>
+              </div>
+              <div className="text-base sm:text-lg font-bold">
+                <p>Years of</p>
+                <p>experience</p>
               </div>
             </div>
-            <div className="flex w-[100%] justify-start gap-20 py-10">
-              <a
-                href="https://www.linkedin.com/in/prajyotpatil2744/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="rounded-full w-10 h-10 bg-transparent"
-                  src={assets.linkdin}
-                  alt="LinkedIn"
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/prajyotpatilll/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="rounded-full w-10 h-10 bg-transparent"
-                  src={assets.insta}
-                  alt="LinkedIn"
-                />
-              </a>
-              <a
-                href="https://github.com/prajyotpatilll"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="rounded-full w-10 h-10 bg-white p-1"
-                  src={assets.github}
-                  alt="LinkedIn"
-                />
-              </a>
+
+            <div className="flex items-center">
+              <div className="flex text-4xl sm:text-5xl font-bold pr-3">
+                <p>{userdata.projects.length}</p>
+                <p className="text-[#f84f39] pl-1 text-2xl sm:text-4xl font-bold">
+                  +
+                </p>
+              </div>
+              <div className="text-base sm:text-lg font-bold">
+                <p>Successful</p>
+                <p>projects</p>
+              </div>
             </div>
           </div>
+
+          <div className="flex justify-center lg:justify-start gap-8 md:py-6 pb-4 border-b-2 border-gray-500">
+            <a
+              href="https://www.linkedin.com/in/prajyotpatil2744/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="rounded-full w-8 h-8 sm:w-10 sm:h-10"
+                src={assets.linkdin}
+                alt="LinkedIn"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/prajyotpatilll/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="rounded-full w-8 h-8 sm:w-10 sm:h-10"
+                src={assets.insta}
+                alt="Instagram"
+              />
+            </a>
+            <a
+              href="https://github.com/prajyotpatilll"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="rounded-full w-8 h-8 sm:w-10 sm:h-10 bg-white p-1"
+                src={assets.github}
+                alt="GitHub"
+              />
+            </a>
+          </div>
         </div>
-        <div>
+
+        <div className="w-full lg:w-1/2 flex justify-center">
           <img
-            className="rounded-full w-[30rem] h-[30rem]"
+            className="rounded-full w-40 h-40 sm:w-60 sm:h-60 lg:w-[30rem] lg:h-[30rem]"
             src={userdata.profile_photo}
             alt="photograph"
           />
         </div>
       </div>
+
+      <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center py-12">
+        Education<span className="text-green-500 ">.</span>
+      </div>
+
+      <div className="px-4 sm:px-8 md:px-12">
+        <div className="border-b-2 border-gray-500 py-5 flex flex-col items-center lg:items-start text-center lg:text-left">
+          <p className="text-2xl sm:text-3xl font-bold pb-2">
+            {userdata.education.degreename}
+            <span className="px-2">|</span>
+            <span className="text-lg sm:text-xl text-gray-400">
+              {userdata.education.field}
+            </span>
+          </p>
+          <p className="text-base sm:text-lg font-bold text-gray-400">
+            {userdata.education.college}
+            <span className="px-2">|</span>
+            <span className="text-white">
+              {userdata.education.startyear} - {userdata.education.completeyear}
+            </span>
+          </p>
+        </div>
+      </div>
+
       <div>
         {isedit ? (
           <button
@@ -334,11 +358,11 @@ const DevelopersProfile = () => {
         )}
       </div>
 
-      <div className="text-6xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center py-16 ">
-        Skills <span className="text-[#2a966f]">.</span>
+      <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center py-12 ">
+        Skills <span className="text-blue-500">.</span>
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 pb-10">
+      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 pb-10 border-b-2 border-gray-500">
         {userdata.skills && userdata.skills.length > 0 ? (
           userdata.skills.map((item, index) => (
             <div key={index} className="flex items-center justify-center">
@@ -371,12 +395,12 @@ const DevelopersProfile = () => {
         <p></p>
       )}
 
-      <div className="text-6xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center pt-12 ">
+      <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center pt-12 ">
         Projects <span className="text-[#f84f39]">.</span>
       </div>
 
       <div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 2xl:p-10 p-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 2xl:p-10 p-5 border-b-2  border-gray-500">
           {userdata.projects && userdata.projects.length > 0 ? (
             userdata.projects.slice(0, 10).map((project) => (
               <div
@@ -452,26 +476,32 @@ const DevelopersProfile = () => {
         <p></p>
       )}
 
-      <div className="text-6xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center pt-20 ">
-        Let's work together <span className="text-[#847fe7]">.</span>
+      <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white flex justify-center items-center pt-16 sm:pt-20 text-center p-10">
+        Let's work with {userdata.name}
+        <span className="text-[#847fe7] pl-2">.</span>
       </div>
 
-      <div className="flex py-20 justify-center items-start gap-10">
-        <div className="w-[25vw]">
-          <p className="text-3xl font-bold pb-5">Get in touch with me</p>
-          <p className="text-lg font-bold text-gray-400">
+      <div className="flex flex-col lg:flex-row py-10 sm:py-16 lg:py-20 justify-center items-start gap-10 border-b-2 border-gray-500 px-4 sm:px-8">
+        {/* Left Section */}
+        <div className="w-full lg:w-[30%]">
+          <p className="text-2xl sm:text-3xl font-bold pb-4 sm:pb-5">
+            Get in touch with me
+          </p>
+          <p className="text-base sm:text-lg font-semibold text-gray-400">
             "Let's connect! Whether you have a project idea, a question, or just
             want to say hello, I'd love to hear from you. Fill out the form
             below with your details, and I’ll respond as soon as possible."
           </p>
-          <div className="flex gap-10 py-10">
+
+          {/* Social Icons */}
+          <div className="flex gap-6 sm:gap-10 py-6 sm:py-10">
             <a
               href="https://www.linkedin.com/in/prajyotpatil2744/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                className="rounded-full w-10 h-10 bg-transparent"
+                className="rounded-full w-10 h-10"
                 src={assets.linkdin}
                 alt="LinkedIn"
               />
@@ -482,9 +512,9 @@ const DevelopersProfile = () => {
               rel="noopener noreferrer"
             >
               <img
-                className="rounded-full w-10 h-10 bg-transparent"
+                className="rounded-full w-10 h-10"
                 src={assets.insta}
-                alt="LinkedIn"
+                alt="Instagram"
               />
             </a>
             <a
@@ -495,22 +525,24 @@ const DevelopersProfile = () => {
               <img
                 className="rounded-full w-10 h-10 bg-white p-1"
                 src={assets.github}
-                alt="LinkedIn"
+                alt="GitHub"
               />
             </a>
           </div>
         </div>
-        <div>
+
+        {/* Right Section - Form */}
+        <div className="w-full lg:w-[30%]">
           <form
             onSubmit={handleSubmit1}
-            className=" p-10 rounded-2xl shadow-md w-full max-w-md space-y-4 py-20 px-10  bg-slate-600"
+            className="p-6 sm:p-8 rounded-2xl shadow-md w-full bg-slate-600 space-y-4"
           >
             <input
               name="name"
               placeholder="Your Name"
               onChange={handleChange1}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
 
             <input
@@ -518,7 +550,7 @@ const DevelopersProfile = () => {
               placeholder="Your Email"
               onChange={handleChange1}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
 
             <textarea
@@ -526,7 +558,7 @@ const DevelopersProfile = () => {
               placeholder="Your Message"
               onChange={handleChange1}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none h-44"
+              className="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none h-40"
             />
 
             <button
@@ -540,7 +572,7 @@ const DevelopersProfile = () => {
       </div>
 
       {isVisible && (
-        <div className="absolute z-50 -bottom-14 md:bottom-24 xl:w-[30vw] md:h-[40vh] h-auto w-[90vw] bg-white/80 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
+        <div className="absolute z-50 xl:w-[30vw] md:h-[40vh] h-auto w-[90vw] bg-white/80 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
           <input
             type="text"
             placeholder="Skill Name"
@@ -583,7 +615,7 @@ const DevelopersProfile = () => {
       )}
 
       {isVisible1 && (
-        <div className="absolute z-50 -bottom-20 md:bottom-24 xl:w-[30vw] md:h-[40vh] h-auto w-[90vw]  backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg grid md:grid-cols-3 grid-cols-2 md:p-7 p-5">
+        <div className="absolute z-50  xl:w-[30vw] md:h-[40vh] h-auto w-[90vw]  backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg grid md:grid-cols-3 grid-cols-2 md:p-7 p-5">
           {userdata.skills && userdata.skills.length > 0 ? (
             userdata.skills.map((item, index) => (
               <div
@@ -617,7 +649,7 @@ const DevelopersProfile = () => {
       {/* project add section */}
 
       {isVisible11 && (
-        <div className="relative z-50 bottom-48 md:w-[50vw] md:h-[55vh] w-[80vw] h-[50vh] backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
+        <div className="absolute z-50  md:w-[50vw] md:h-[55vh] w-[80vw] h-[50vh] backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
           <form
             onSubmit={handleSubmit}
             className="space-y-4"

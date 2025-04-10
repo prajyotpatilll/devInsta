@@ -26,6 +26,14 @@ const Editprofile = () => {
       formData.append("role", userdata.role || "");
       formData.append("description", userdata.description || "");
 
+      if (userdata.education) {
+        formData.append("education[degreename]", userdata.education.degreename || "");
+        formData.append("education[field]", userdata.education.field || "");
+        formData.append("education[college]", userdata.education.college || "");
+        formData.append("education[startyear]", userdata.education.startyear || "");
+        formData.append("education[completeyear]", userdata.education.completeyear || "present");
+      }
+
       if (image) formData.append("profile_photo", image);
 
       const { data } = await axios.post(
@@ -107,6 +115,107 @@ const Editprofile = () => {
             <option value="Female">Female</option>
           </select>
         </div>
+        <div>
+          <label className="block text-base font-medium text-gray-300">
+            Education
+          </label>
+          <div>
+            <label className="block text-base font-medium text-gray-300">
+              Degree Name
+            </label>
+            <input
+              type="text"
+              value={userdata.education?.degreename || ""}
+              onChange={(e) =>
+                setuserdata((prev) => ({
+                  ...prev,
+                  education: { ...prev.education, degreename: e.target.value },
+                }))
+              }
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="e.g., BCA, B.Tech, M.Tech"
+            />
+          </div>
+
+          <div>
+            <label className="block text-base font-medium text-gray-300">
+              Field of Study
+            </label>
+            <input
+              type="text"
+              value={userdata.education?.field || ""}
+              onChange={(e) =>
+                setuserdata((prev) => ({
+                  ...prev,
+                  education: { ...prev.education, field: e.target.value },
+                }))
+              }
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="e.g., Computer Science, IT"
+            />
+          </div>
+
+          <div>
+            <label className="block text-base font-medium text-gray-300">
+              College/University
+            </label>
+            <input
+              type="text"
+              value={userdata.education?.college || ""}
+              onChange={(e) =>
+                setuserdata((prev) => ({
+                  ...prev,
+                  education: { ...prev.education, college: e.target.value },
+                }))
+              }
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="e.g., Vivekanand College"
+            />
+          </div>
+
+          <div className="flex gap-4">
+            <div className="w-1/2">
+              <label className="block text-base font-medium text-gray-300">
+                Start Year
+              </label>
+              <input
+                type="number"
+                value={userdata.education?.startyear || ""}
+                onChange={(e) =>
+                  setuserdata((prev) => ({
+                    ...prev,
+                    education: { ...prev.education, startyear: e.target.value },
+                  }))
+                }
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="e.g., 2022"
+              />
+            </div>
+
+            <div className="w-1/2">
+              <label className="block text-base font-medium text-gray-300">
+                Completion Year
+              </label>
+              <input
+                type="text"
+                value={userdata.education?.completeyear || ""}
+                onChange={(e) =>
+                  setuserdata((prev) => ({
+                    ...prev,
+                    education: {
+                      ...prev.education,
+                      completeyear: e.target.value,
+                    },
+                  }))
+                }
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="e.g., 2025 or present"
+              />
+            </div>
+          </div>
+        </div>
+
+        
 
         <div>
           <label className="block text-base font-medium text-gray-300">
@@ -201,7 +310,7 @@ const Editprofile = () => {
             }}
           ></textarea>
           <p className="text-sm text-gray-500">
-            {userdata.description.length}/400 
+          {(userdata.description?.length ?? 0)}/400
           </p>{" "}
           {/* Shows character count */}
         </div>

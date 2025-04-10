@@ -28,6 +28,16 @@ const UserSchema = new mongoose.Schema({
       live_preview_link: { type: String, default: '' }
     }
   ],
+  education:{
+      degreename :{type: String, default:""},
+      field:{type:String, default:" "},
+      college:{type:String, default:""},
+      startyear:{type:String, default:""},
+      completeyear:{type:String, default:""}
+  },
+  linden:{type:String, default:""},
+  intagram:{type:String, default:""},
+  github:{type:String, default:""},
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });

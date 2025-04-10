@@ -92,11 +92,23 @@ const getprofile = async (req, res) => {
 
 const editprofile = async (req, res) => {
     try {
-        const { userid, name, role, description, gender, phone, dob, address, skills } = req.body;
-        const files = req.files; // Handle multiple files via req.files (requires multer configuration)
-
+        const {
+            userid,
+            name,
+            role,
+            description,
+            gender,
+            phone,
+            dob,
+            address,
+            skills,
+            education // Ensure education is sent as an object
+        } = req.body;
+        
+        const files = req.files; // Handling multiple files via multer
+        
         if (!userid || !name || !phone || !dob || !gender) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
                 message: "Missing required fields for update",
             });
@@ -105,31 +117,44 @@ const editprofile = async (req, res) => {
         // Build update object
         const updates = { name, phone, address, dob, gender, role, description, skills };
 
+        // Handle education fields
+        if (education) {
+            updates.education = {
+                degreename: education.degreename || "",
+                field: education.field || "",
+                college: education.college || "",
+                startyear: education.startyear || "",
+                completeyear: education.completeyear || "present"
+            };
+        }
+
         // Function to handle file uploads to Cloudinary
         const uploadToCloudinary = async (file, resourceType = "image") => {
-            const upload = await cloudinary.uploader.upload(file.path, { resource_type: resourceType });
-            return upload.secure_url;
+            try {
+                const upload = await cloudinary.uploader.upload(file.path, { resource_type: resourceType });
+                return upload.secure_url;
+            } catch (error) {
+                throw new Error(`Error uploading ${resourceType}: ${error.message}`);
+            }
         };
 
-        // Handle profile_photo
+        // Handle profile_photo upload
         if (files?.profile_photo) {
             try {
                 updates.profile_photo = await uploadToCloudinary(files.profile_photo[0], "image");
             } catch (error) {
-                console.error("Error uploading profile photo:", error);
-                return res.json({
+                return res.status(500).json({
                     success: false,
                     message: "Error uploading profile photo",
                 });
             }
         }
 
-        // Handle resume
+        // Handle resume upload
         if (files?.resume) {
             try {
-                updates.resume = await uploadToCloudinary(files.resume[0], "image"); // Assuming resume is a document
+                updates.resume = await uploadToCloudinary(files.resume[0], "auto"); // Auto-detect file type
             } catch (error) {
-                console.error("Error uploading resume:", error);
                 return res.status(500).json({
                     success: false,
                     message: "Error uploading resume",
@@ -138,7 +163,7 @@ const editprofile = async (req, res) => {
         }
 
         // Update user in the database
-        await userModel.findByIdAndUpdate(userid, updates);
+        await userModel.findByIdAndUpdate(userid, updates, { new: true });
 
         res.json({
             success: true,
@@ -152,6 +177,7 @@ const editprofile = async (req, res) => {
         });
     }
 };
+
 
 const addproject = async (req, res) => {
     try {
