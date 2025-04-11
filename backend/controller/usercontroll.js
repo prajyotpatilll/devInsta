@@ -102,11 +102,15 @@ const editprofile = async (req, res) => {
             dob,
             address,
             skills,
-            education // Ensure education is sent as an object
+            education,
+            linden,
+            intagram,
+            github,
+            exprience
         } = req.body;
-        
+
         const files = req.files; // Handling multiple files via multer
-        
+
         if (!userid || !name || !phone || !dob || !gender) {
             return res.status(400).json({
                 success: false,
@@ -115,7 +119,20 @@ const editprofile = async (req, res) => {
         }
 
         // Build update object
-        const updates = { name, phone, address, dob, gender, role, description, skills };
+        const updates = {
+            name,
+            phone,
+            address,
+            dob,
+            gender,
+            role,
+            description,
+            skills,
+            linden,
+            intagram,
+            github,
+            exprience
+        };
 
         // Handle education fields
         if (education) {
@@ -131,7 +148,9 @@ const editprofile = async (req, res) => {
         // Function to handle file uploads to Cloudinary
         const uploadToCloudinary = async (file, resourceType = "image") => {
             try {
-                const upload = await cloudinary.uploader.upload(file.path, { resource_type: resourceType });
+                const upload = await cloudinary.uploader.upload(file.path, {
+                    resource_type: resourceType
+                });
                 return upload.secure_url;
             } catch (error) {
                 throw new Error(`Error uploading ${resourceType}: ${error.message}`);
@@ -177,6 +196,7 @@ const editprofile = async (req, res) => {
         });
     }
 };
+
 
 
 const addproject = async (req, res) => {

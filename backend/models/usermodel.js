@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema({
   linden:{type:String, default:""},
   intagram:{type:String, default:""},
   github:{type:String, default:""},
+  exprience:{type:String,default:"0"},
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });
