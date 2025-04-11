@@ -20,20 +20,36 @@ const Editprofile = () => {
 
       formData.append("name", userdata.name || "");
       formData.append("phone", userdata.phone || "");
-      // formData.append("address", userdata.address || "");
       formData.append("gender", userdata.gender || "Male");
       formData.append("dob", userdata.dob || "");
       formData.append("role", userdata.role || "");
       formData.append("description", userdata.description || "");
 
+      // Append new fields
+      formData.append("linden", userdata.linden || "");
+      formData.append("intagram", userdata.intagram || "");
+      formData.append("github", userdata.github || "");
+      formData.append("exprience", userdata.exprience || "0");
+
+      // Education
       if (userdata.education) {
-        formData.append("education[degreename]", userdata.education.degreename || "");
+        formData.append(
+          "education[degreename]",
+          userdata.education.degreename || ""
+        );
         formData.append("education[field]", userdata.education.field || "");
         formData.append("education[college]", userdata.education.college || "");
-        formData.append("education[startyear]", userdata.education.startyear || "");
-        formData.append("education[completeyear]", userdata.education.completeyear || "present");
+        formData.append(
+          "education[startyear]",
+          userdata.education.startyear || ""
+        );
+        formData.append(
+          "education[completeyear]",
+          userdata.education.completeyear || "present"
+        );
       }
 
+      // Profile photo
       if (image) formData.append("profile_photo", image);
 
       const { data } = await axios.post(
@@ -115,6 +131,71 @@ const Editprofile = () => {
             <option value="Female">Female</option>
           </select>
         </div>
+
+        {/* LinkedIn */}
+        <div>
+          <label className="block text-base font-medium text-gray-300">
+            LinkedIn
+          </label>
+          <input
+            type="text"
+            placeholder="LinkedIn Profile URL"
+            value={userdata.linden || ""}
+            onChange={(e) =>
+              setuserdata({ ...userdata, linden: e.target.value })
+            }
+            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        {/* Instagram */}
+        <div>
+          <label className="block text-base font-medium text-gray-300">
+            Instagram
+          </label>
+          <input
+            type="text"
+            placeholder="Instagram Username or URL"
+            value={userdata.intagram || ""}
+            onChange={(e) =>
+              setuserdata({ ...userdata, intagram: e.target.value })
+            }
+            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        {/* GitHub */}
+        <div>
+          <label className="block text-base font-medium text-gray-300">
+            GitHub
+          </label>
+          <input
+            type="text"
+            placeholder="GitHub Profile URL"
+            value={userdata.github || ""}
+            onChange={(e) =>
+              setuserdata({ ...userdata, github: e.target.value })
+            }
+            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        {/* Experience */}
+        <div>
+          <label className="block text-base font-medium text-gray-300">
+            Experience (in years)
+          </label>
+          <input
+            type="number"
+            placeholder="e.g., 2"
+            value={userdata.exprience || ""}
+            onChange={(e) =>
+              setuserdata({ ...userdata, exprience: e.target.value })
+            }
+            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
         <div>
           <label className="block text-base font-medium text-gray-300">
             Education
@@ -215,8 +296,6 @@ const Editprofile = () => {
           </div>
         </div>
 
-        
-
         <div>
           <label className="block text-base font-medium text-gray-300">
             Role
@@ -310,7 +389,7 @@ const Editprofile = () => {
             }}
           ></textarea>
           <p className="text-sm text-gray-500">
-          {(userdata.description?.length ?? 0)}/400
+            {userdata.description?.length ?? 0}/400
           </p>{" "}
           {/* Shows character count */}
         </div>

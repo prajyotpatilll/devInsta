@@ -251,7 +251,7 @@ const DevelopersProfile = () => {
           <div className="py-6 flex flex-col sm:flex-row items-center justify-between w-full max-w-md sm:max-w-lg md:max-w-xl gap-6 sm:gap-10">
             <div className="flex items-center">
               <div className="flex text-4xl sm:text-5xl font-bold pr-3">
-                <p>1.5</p>
+                <p>{userdata.exprience}</p>
                 <p className="text-[#f84f39] pl-1 text-2xl sm:text-4xl font-bold">
                   +
                 </p>
@@ -278,7 +278,7 @@ const DevelopersProfile = () => {
 
           <div className="flex justify-center lg:justify-start gap-8 md:py-6 pb-4 border-b-2 border-gray-500">
             <a
-              href="https://www.linkedin.com/in/prajyotpatil2744/"
+              href={userdata.linden}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -289,7 +289,7 @@ const DevelopersProfile = () => {
               />
             </a>
             <a
-              href="https://www.instagram.com/prajyotpatilll/"
+              href={userdata.intagram}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -300,7 +300,7 @@ const DevelopersProfile = () => {
               />
             </a>
             <a
-              href="https://github.com/prajyotpatilll"
+              href={userdata.github}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -496,7 +496,7 @@ const DevelopersProfile = () => {
           {/* Social Icons */}
           <div className="flex gap-6 sm:gap-10 py-6 sm:py-10">
             <a
-              href="https://www.linkedin.com/in/prajyotpatil2744/"
+              href={userdata.linden}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -507,7 +507,7 @@ const DevelopersProfile = () => {
               />
             </a>
             <a
-              href="https://www.instagram.com/prajyotpatilll/"
+              href={userdata.intagram}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -518,7 +518,7 @@ const DevelopersProfile = () => {
               />
             </a>
             <a
-              href="https://github.com/prajyotpatilll"
+              href={userdata.github}
               target="_blank"
               rel="noopener noreferrer"
             >

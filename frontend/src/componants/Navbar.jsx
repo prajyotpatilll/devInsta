@@ -68,7 +68,7 @@ const Navbar = () => {
               <div className="rounded-lg absolute -right-10 mt-2 py-5 px-8  transform -translate-x-1/2 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300 text-lg z-40">
                 <p
                   className="mb-4 cursor-pointer bg-transparent"
-                  onClick={() => navigate(`/developers/${userdata._id}`)}
+                  onClick={() => navigate(`/${userdata._id}`)}
                 >
                   Profile
                 </p>
