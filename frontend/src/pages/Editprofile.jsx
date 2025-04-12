@@ -371,28 +371,25 @@ const Editprofile = () => {
         </div>
 
         <div>
-          <label className="block text-base font-medium text-gray-300">
-            Description
-          </label>
-          <textarea
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            rows="4"
-            maxLength={100} // Limits input to 100 characters
-            value={userdata.description || ""}
-            onChange={(e) => {
-              if (e.target.value.length <= 100) {
-                setuserdata((prev) => ({
-                  ...prev,
-                  description: e.target.value,
-                }));
-              }
-            }}
-          ></textarea>
-          <p className="text-sm text-gray-500">
-            {userdata.description?.length ?? 0}/400
-          </p>{" "}
-          {/* Shows character count */}
-        </div>
+  <label className="block text-base font-medium text-gray-300">
+    Description
+  </label>
+  <textarea
+    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+    rows="4"
+    maxLength={400} // Corrected from 100 to 400
+    value={userdata.description || ""}
+    onChange={(e) => {
+      setuserdata((prev) => ({
+        ...prev,
+        description: e.target.value,
+      }));
+    }}
+  ></textarea>
+  <p className="text-sm text-gray-500">
+    {userdata.description?.length ?? 0}/400
+  </p>
+</div>
 
         <button
           onClick={updateuserprofile}
