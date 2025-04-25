@@ -1,35 +1,31 @@
 import React from "react";
 import { assets } from "../assets/assets";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const HomeBanner = () => {
+  
   return (
-    <div className="relative flex lg:flex-row flex-col items-center lg:justify-between justify-start text-center  text-white h-auto pt-5 md:pt-20  lg:pt-0 lg:min-h-[90vh] overflow-hidden ">
-      
-      <div className="lg:absolute sm:block relative right-0 rounded-md hidden">
-        <video
-          src={assets.video}
-          autoPlay
-          loop
-          muted
-          className="relative  lg:w-auto xl:h-[75vh] lg:h-[55vh] h-full w-[90vw]  rounded-2xl 2xl:-right-1/4 lg:-right-2/4" 
-        />
-      </div>
-      
-      
-
-      <div className="lg:absolute relative z-10  2xl:left-20  bg-transparent flex flex-col items-center p-5  justify-center">
-        <div className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl  2xl:text-8xl font-extrabold text-white mb-4 bg-transparent">
-          Welcome to 
+    <div className=" text-center flex justify-center items-center text-white sm:h-[90vh] h-auto sm:py-0 py-16   ">
+      <div className="z-10  2xl:left-20  bg-transparent flex flex-col items-center p-5  justify-center">
+        <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl  2xl:text-9xl font-extrabold text-white mb-3 bg-transparent">
+          Welcome to
         </div>
-        <div className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl  2xl:text-8xl font-extrabold text-[#f84f39] lg:mb-4 bg-transparent">
-           <span className="text-[#2a966f] bg-transparent ">&lt;</span>DevInsta
+        <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl  2xl:text-9xl font-extrabold text-[#f84f39] lg:mb-5 bg-transparent">
+          <span className="text-[#2a966f] bg-transparent ">&lt;</span>DevInsta
           <span className="text-[#2a966f] bg-transparent">/&gt;</span>
         </div>
-        
 
-        <div className="md:text-base text-sm flex  max-w-xl mx-auto text-gray-400 mt-8 bg-transparent">
+        <div className="md:text-lg text-sm flex  max-w-2xl mx-auto text-gray-400 mt-8 mb-5 bg-transparent">
           DevInsta is a platform designed for developers to showcase their
-          projects and skills. a platform where developers can build a strong portfolio in one place! 🔥
+          projects and skills. a platform where developers can build a strong
+          portfolio in one place! 🔥
+        </div>
+        <div className="flex flex-col gap-5 sm:flex-row">
+          <NavLink onClick={() => window.scrollTo(0, 0)} to="/developers">
+            <button className="bg-[#2a966f] text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-[#e43b2a] transition duration-300">
+              Explore Developers Portfolios
+            </button>
+          </NavLink>
         </div>
       </div>
     </div>
