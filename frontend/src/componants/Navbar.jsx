@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/Appcontext";
 import { assets } from "../assets/assets.js";
+import { motion } from "framer-motion";
+
 const Navbar = () => {
   const { token, settoken, userdata } = useContext(AppContext);
   const navigate = useNavigate();
@@ -14,13 +16,19 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" lg:p-6 md:px-16 px-8 flex justify-between items-center w-[100vw]  min-h-[10vh] lg:justify-around">
+    <motion.div
+    initial={{ y: -70, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+     
+  >
+    <div className=" lg:p-6 md:px-16 px-8 flex justify-between items-center w-[100vw]  min-h-[10vh] lg:justify-around border-b-2 border-gray-600">
       <div
         onClick={() => {
           navigate("/");
           window.scrollTo(0, 0);
         }}
-        className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-extrabold text-[#f84f39]  bg-transparent flex justify-center cursor-pointer"
+        className="text-2xl sm:text-4xl md:text-4xl lg:text-4xl font-extrabold text-[#f84f39]    flex justify-center cursor-pointer"
       >
         <span className="text-[#2a966f] bg-transparent ">&lt;</span>DevInsta
         <span className="text-[#2a966f] bg-transparent">/&gt;</span>
@@ -123,6 +131,7 @@ const Navbar = () => {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };
 

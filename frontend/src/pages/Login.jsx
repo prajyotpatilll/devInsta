@@ -11,6 +11,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   const navigate = useNavigate();
 
@@ -55,7 +56,7 @@ const Login = () => {
 
   return (
     <form
-      className=" md:w-[40vw] w-[80vw]  mx-auto bg-transparent p-6 rounded-lg border-2 border-gray-300 mt-10 "
+      className="md:w-[40vw] w-[80vw] mx-auto bg-transparent p-6 rounded-lg border-2 border-gray-300 mt-10"
       onSubmit={onSubmithandler}
     >
       <div className="space-y-4">
@@ -70,9 +71,7 @@ const Login = () => {
 
         {state === "sign up" && (
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-white">
-              Full Name
-            </label>
+            <label className="block text-sm font-medium text-white">Full Name</label>
             <input
               type="text"
               className="w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-white"
@@ -84,9 +83,7 @@ const Login = () => {
         )}
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-white">
-            Email
-          </label>
+          <label className="block text-sm font-medium text-white">Email</label>
           <input
             type="email"
             className="w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-white"
@@ -95,24 +92,32 @@ const Login = () => {
             placeholder="Enter your email"
           />
         </div>
+
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-white">
-            Password
-          </label>
+          <label className="block text-sm font-medium text-white">Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"} // Toggle password visibility
             className="w-full px-4 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-white"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             placeholder="Enter your password"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+            className="text-sm text-blue-400 mt-1"
+          >
+            {showPassword ? "Hide Password" : "Show Password"}
+          </button>
         </div>
+
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
         >
           {state === "sign up" ? "Sign Up" : "Log In"}
         </button>
+
         <div className="text-sm text-white mt-4">
           {state === "sign up" ? (
             <p>

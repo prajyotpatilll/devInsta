@@ -18,7 +18,7 @@ const App = () => {
     <div className="flex flex-col items-center justify-center w-[100vw]">
       <ToastContainer />
 
-      <header>
+      <header className="sticky top-0 z-50">
         <Navbar />
       </header>
 

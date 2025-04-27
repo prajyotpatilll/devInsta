@@ -7,11 +7,11 @@ const Developers = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full p-6 flex flex-col items-start justify-center">
+    <div className="w-full p-6 flex flex-col items-center justify-center">
       {/* Heading section */}
       <div className="flex items-center justify-center mb-6">
         <h2 className="text-3xl md:text-4xl font-bold">Discover</h2>
-        <h2 className="text-3xl md:text-4xl font-bold pl-4 text-gray-500">Projects</h2>
+        <h2 className="text-3xl md:text-4xl font-bold pl-2 text-gray-500">Developers</h2>
       </div>
 
       {/* Developer Cards Grid */}

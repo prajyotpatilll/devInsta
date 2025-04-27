@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/Appcontext";
 import { assets } from "../assets/assets";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const DevelopersProfile = () => {
   const { backendURL, uniqid, token, getmyprofile } = useContext(AppContext);
@@ -225,9 +227,20 @@ const DevelopersProfile = () => {
 
   return (
     <div className="flex flex-col items-center justify-center rounded-lg ">
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-center md:gap-10 gap-0 lg:gap-20 rounded-2xl mx-auto shadow-lg px-4 md:py-10 py-1 w-full max-w-screen-xl">
-        <div className="flex flex-col w-full lg:w-1/2 items-center lg:items-start">
-          <div className="mb-6 text-center lg:text-left">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-center md:gap-10 gap-0 lg:gap-20 rounded-2xl mx-auto shadow-lg px-4 md:py-16 py-8 w-full max-w-screen-xl">
+        {/* Left Content */}
+        <motion.div
+          className="flex flex-col w-full lg:w-1/2 items-center lg:items-start"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="mb-6 text-center lg:text-left"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
             <p className="text-4xl sm:text-5xl lg:text-7xl font-bold pb-6 text-[#847fe7]">
               _____
             </p>
@@ -240,15 +253,26 @@ const DevelopersProfile = () => {
             <p className="text-lg sm:text-xl lg:text-2xl font-black text-gray-300 md:pb-5 pb-0">
               {userdata.role}
             </p>
-          </div>
+          </motion.div>
 
-          <div className="text-center lg:text-left">
+          <motion.div
+            className="text-center lg:text-left"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
             <p className="text-sm sm:text-base text-gray-300 border-b-2 border-gray-500 pb-5 max-w-md sm:max-w-lg md:max-w-xl">
               {userdata.description}
             </p>
-          </div>
+          </motion.div>
 
-          <div className="py-6 flex flex-col sm:flex-row items-center justify-between w-full max-w-md sm:max-w-lg md:max-w-xl gap-6 sm:gap-10">
+          <motion.div
+            className="py-6 flex flex-col sm:flex-row items-center justify-between w-full max-w-md sm:max-w-lg md:max-w-xl gap-6 sm:gap-10"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.7 }}
+          >
+            {/* Experience */}
             <div className="flex items-center">
               <div className="flex text-4xl sm:text-5xl font-bold pr-3">
                 <p>{userdata.exprience}</p>
@@ -262,6 +286,7 @@ const DevelopersProfile = () => {
               </div>
             </div>
 
+            {/* Projects */}
             <div className="flex items-center">
               <div className="flex text-4xl sm:text-5xl font-bold pr-3">
                 <p>{userdata.projects.length}</p>
@@ -274,18 +299,21 @@ const DevelopersProfile = () => {
                 <p>projects</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex justify-center lg:justify-start gap-8 md:py-6 pb-4 border-b-2 border-gray-500">
-            <a
-              href={userdata.linden}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
+          {/* Social Links */}
+          <motion.div
+            className="flex justify-center lg:justify-start gap-8 md:py-6 pb-4 border-b-2 border-gray-500"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+          >
+            <a href={userdata.linden} target="_blank" rel="noopener noreferrer">
+              <motion.img
                 className="rounded-full w-8 h-8 sm:w-10 sm:h-10"
                 src={assets.linkdin}
                 alt="LinkedIn"
+                whileHover={{ scale: 1.2 }}
               />
             </a>
             <a
@@ -293,40 +321,51 @@ const DevelopersProfile = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
+              <motion.img
                 className="rounded-full w-8 h-8 sm:w-10 sm:h-10"
                 src={assets.insta}
                 alt="Instagram"
+                whileHover={{ scale: 1.2 }}
               />
             </a>
-            <a
-              href={userdata.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
+            <a href={userdata.github} target="_blank" rel="noopener noreferrer">
+              <motion.img
                 className="rounded-full w-8 h-8 sm:w-10 sm:h-10 bg-white p-1"
                 src={assets.github}
                 alt="GitHub"
+                whileHover={{ scale: 1.2 }}
               />
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="w-full lg:w-1/2 flex justify-center">
-          <img
+        {/* Right Side Image */}
+        <motion.div
+          className="w-full lg:w-1/2 flex justify-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.img
             className="rounded-full w-40 h-40 sm:w-60 sm:h-60 lg:w-[30rem] lg:h-[30rem]"
             src={userdata.profile_photo}
             alt="photograph"
+            whileHover={{ scale: 1.05 }}
           />
-        </div>
+        </motion.div>
       </div>
 
       <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center py-12">
         Education<span className="text-green-500 ">.</span>
       </div>
 
-      <div className="px-4 sm:px-8 md:px-12">
+      <motion.div
+        className="px-4 sm:px-8 md:px-12"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
         <div className="border-b-2 border-gray-500 py-5 flex flex-col items-center lg:items-start text-center lg:text-left">
           <p className="text-2xl sm:text-3xl font-bold pb-2">
             {userdata.education.degreename}
@@ -343,7 +382,7 @@ const DevelopersProfile = () => {
             </span>
           </p>
         </div>
-      </div>
+      </motion.div>
 
       <div>
         {isedit ? (
@@ -362,18 +401,32 @@ const DevelopersProfile = () => {
         Skills <span className="text-blue-500">.</span>
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 pb-10 border-b-2 border-gray-500">
-        {userdata.skills && userdata.skills.length > 0 ? (
-          userdata.skills.map((item, index) => (
-            <div key={index} className="flex items-center justify-center">
-              <p className="border-2 text-sm sm:text-lg md:text-xl border-gray-300 px-5 sm:px-8 md:px-10 py-1 flex items-center justify-center rounded-3xl m-2 text-red-500 font-bold cursor-pointer ">
-                {item.name}
-              </p>
-            </div>
-          ))
-        ) : (
-          <p className=" text-gray-500 text-sm md:text-base flex items-center justify-center"></p>
-        )}
+      <div className="pb-10 border-b-2 border-gray-500">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
+          {userdata.skills && userdata.skills.length > 0 ? (
+            userdata.skills.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                whileHover={{ scale: 1.1 }}
+                transition={{
+                  duration: 0.4,
+                  ease: "easeOut",
+                  delay: index * 0.05,
+                }}
+                viewport={{ once: true }}
+                className="flex items-center justify-center"
+              >
+                <p className="border-2 text-sm sm:text-lg md:text-xl border-gray-300 px-5 sm:px-8 md:px-10 py-1 flex items-center justify-center rounded-3xl m-2 text-red-500 font-bold cursor-pointer transition-all duration-300">
+                  {item.name}
+                </p>
+              </motion.div>
+            ))
+          ) : (
+            <p className="text-gray-500 text-sm md:text-base flex items-center justify-center"></p>
+          )}
+        </div>
       </div>
 
       {isedit ? (
@@ -475,10 +528,14 @@ const DevelopersProfile = () => {
       ) : (
         <p></p>
       )}
-
-      <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white flex justify-center items-center pt-16 sm:pt-20 text-center p-10">
-        Let's work with {userdata.name}
-        <span className="text-[#847fe7] pl-2">.</span>
+      <div className="flex flex-col justify-start items-center">
+        <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold pb-3 text-white flex justify-center items-center pt-12">
+          Let's work
+        </div>
+        <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold  text-white flex justify-center items-center pb-6">
+          with {userdata.name}
+          <span className="text-[#847fe7] pl-2">.</span>
+        </div>
       </div>
 
       <div className="flex flex-col lg:flex-row py-10 sm:py-16 lg:py-20 justify-center items-start gap-10 border-b-2 border-gray-500 px-4 sm:px-8">
@@ -495,11 +552,7 @@ const DevelopersProfile = () => {
 
           {/* Social Icons */}
           <div className="flex gap-6 sm:gap-10 py-6 sm:py-10">
-            <a
-              href={userdata.linden}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={userdata.linden} target="_blank" rel="noopener noreferrer">
               <img
                 className="rounded-full w-10 h-10"
                 src={assets.linkdin}
@@ -517,11 +570,7 @@ const DevelopersProfile = () => {
                 alt="Instagram"
               />
             </a>
-            <a
-              href={userdata.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={userdata.github} target="_blank" rel="noopener noreferrer">
               <img
                 className="rounded-full w-10 h-10 bg-white p-1"
                 src={assets.github}
