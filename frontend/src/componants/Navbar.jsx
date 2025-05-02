@@ -83,6 +83,7 @@ const Navbar = () => {
                 <p
                   className="cursor-pointer bg-transparent"
                   onClick={() => {
+                    window.scrollTo(0, 0)
                     navigate("./");
                     logout();
                   }}

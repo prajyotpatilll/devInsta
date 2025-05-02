@@ -447,6 +447,81 @@ const DevelopersProfile = () => {
       ) : (
         <p></p>
       )}
+      {isVisible && (
+        <div className="relative z-50 xl:w-[30vw] md:h-[40vh] h-auto w-[90vw] bg-white/80 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
+          <input
+            type="text"
+            placeholder="Skill Name"
+            className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={skillName}
+            onChange={(e) => setSkillName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Skill Use (optional)"
+            className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={skillUse}
+            onChange={(e) => setSkillUse(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              handleClick();
+              addskill();
+            }}
+            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
+          >
+            Save
+          </button>
+          <button
+            onClick={() => {
+              {
+                handleClick();
+              }
+            }}
+            className=" absolute right-0 top-0   font-semibold rounded-lg"
+          >
+            <img
+              className="md:w-10 w-6 h-auto bg-transparent"
+              src={assets.crossred}
+              alt=""
+            />
+          </button>
+        </div>
+      )}
+
+      {isVisible1 && (
+        <div className="relative z-50  xl:w-[30vw] md:h-[40vh] h-auto w-[90vw]  backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg grid md:grid-cols-3 grid-cols-2 md:p-7 p-5">
+          {userdata.skills && userdata.skills.length > 0 ? (
+            userdata.skills.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-center flex-wrap p-2"
+              >
+                <p className="border text-xs sm:text-sm md:text-base border-gray-300  px-3 py-1 flex items-center justify-center rounded-3xl mr-1 text-red-500 font-bold cursor-pointer ">
+                  {item.name}
+                </p>
+                <img
+                  onClick={() => skillidelete(item._id)}
+                  className="w-6 h-auto cursor-pointer"
+                  src={assets.deleteicon}
+                  alt="Delete"
+                />
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500 text-sm md:text-base flex items-center justify-center">
+              No skills available
+            </p>
+          )}
+          <button
+            onClick={handleclick1}
+            className=" px-5 py-1 m-5 bottom-0 left-32px-6 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
+          >
+            save
+          </button>
+        </div>
+      )}
 
       <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold pb-6 text-white flex justify-center items-center pt-12 ">
         Projects <span className="text-[#f84f39]">.</span>
@@ -528,6 +603,77 @@ const DevelopersProfile = () => {
       ) : (
         <p></p>
       )}
+     {isVisible11 && (
+        <div className="relative z-50  md:w-[50vw] md:h-[55vh] w-[80vw] h-[50vh] backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4"
+            encType="multipart/form-data"
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Project Name"
+              value={projectData.name}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+            <input
+              type="text"
+              name="technologies"
+              placeholder="Technologies (comma-separated)"
+              value={projectData.technologies}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+            <input
+              type="url"
+              name="github_link"
+              placeholder="GitHub Link"
+              value={projectData.github_link}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+            <input
+              type="url"
+              name="live_preview_link"
+              placeholder="Live Preview Link (optional)"
+              value={projectData.live_preview_link}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+            />
+            <input
+              type="file"
+              name="photo"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="w-full p-2 border rounded"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+            >
+              Submit
+            </button>
+          </form>
+
+          <button
+            onClick={() => {
+              {
+                handleClick1();
+              }
+            }}
+            className=" absolute right-0 top-0 px-6 py-2  font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 transition duration-200"
+          >
+            <img className="w-10 h-auto" src={assets.crossred} alt="" />
+          </button>
+        </div>
+      )}
+
       <div className="flex flex-col justify-start items-center">
         <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold pb-3 text-white flex justify-center items-center pt-12">
           Let's work
@@ -620,153 +766,10 @@ const DevelopersProfile = () => {
         </div>
       </div>
 
-      {isVisible && (
-        <div className="absolute z-50 xl:w-[30vw] md:h-[40vh] h-auto w-[90vw] bg-white/80 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
-          <input
-            type="text"
-            placeholder="Skill Name"
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            value={skillName}
-            onChange={(e) => setSkillName(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Skill Use (optional)"
-            className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            value={skillUse}
-            onChange={(e) => setSkillUse(e.target.value)}
-          />
-          <button
-            onClick={() => {
-              handleClick();
-              addskill();
-            }}
-            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
-          >
-            Save
-          </button>
-          <button
-            onClick={() => {
-              {
-                handleClick();
-              }
-            }}
-            className=" absolute right-0 top-0   font-semibold rounded-lg"
-          >
-            <img
-              className="md:w-10 w-6 h-auto bg-transparent"
-              src={assets.crossred}
-              alt=""
-            />
-          </button>
-        </div>
-      )}
-
-      {isVisible1 && (
-        <div className="absolute z-50  xl:w-[30vw] md:h-[40vh] h-auto w-[90vw]  backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg grid md:grid-cols-3 grid-cols-2 md:p-7 p-5">
-          {userdata.skills && userdata.skills.length > 0 ? (
-            userdata.skills.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-center flex-wrap p-2"
-              >
-                <p className="border text-xs sm:text-sm md:text-base border-gray-300  px-3 py-1 flex items-center justify-center rounded-3xl mr-1 text-red-500 font-bold cursor-pointer ">
-                  {item.name}
-                </p>
-                <img
-                  onClick={() => skillidelete(item._id)}
-                  className="w-6 h-auto cursor-pointer"
-                  src={assets.deleteicon}
-                  alt="Delete"
-                />
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-500 text-sm md:text-base flex items-center justify-center">
-              No skills available
-            </p>
-          )}
-          <button
-            onClick={handleclick1}
-            className=" px-5 py-1 m-5 bottom-0 left-32px-6 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200"
-          >
-            save
-          </button>
-        </div>
-      )}
+      
       {/* project add section */}
 
-      {isVisible11 && (
-        <div className="absolute z-50  md:w-[50vw] md:h-[55vh] w-[80vw] h-[50vh] backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6">
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-4"
-            encType="multipart/form-data"
-          >
-            <input
-              type="text"
-              name="name"
-              placeholder="Project Name"
-              value={projectData.name}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-            <input
-              type="text"
-              name="technologies"
-              placeholder="Technologies (comma-separated)"
-              value={projectData.technologies}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-            <input
-              type="url"
-              name="github_link"
-              placeholder="GitHub Link"
-              value={projectData.github_link}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-            <input
-              type="url"
-              name="live_preview_link"
-              placeholder="Live Preview Link (optional)"
-              value={projectData.live_preview_link}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
-            <input
-              type="file"
-              name="photo"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-            >
-              Submit
-            </button>
-          </form>
-
-          <button
-            onClick={() => {
-              {
-                handleClick1();
-              }
-            }}
-            className=" absolute right-0 top-0 px-6 py-2  font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-opacity-75 transition duration-200"
-          >
-            <img className="w-10 h-auto" src={assets.crossred} alt="" />
-          </button>
-        </div>
-      )}
+      
     </div>
   );
 };
