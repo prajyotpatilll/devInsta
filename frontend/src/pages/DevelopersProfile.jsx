@@ -6,6 +6,7 @@ import { AppContext } from "../context/Appcontext";
 import { assets } from "../assets/assets";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Resumegen from "../componants/Resumegen";
 
 const DevelopersProfile = () => {
   const { backendURL, uniqid, token, getmyprofile } = useContext(AppContext);
@@ -227,6 +228,9 @@ const DevelopersProfile = () => {
 
   return (
     <div className="flex flex-col items-center justify-center rounded-lg ">
+     
+        
+     
       <div className="flex flex-col-reverse lg:flex-row items-center justify-center md:gap-10 gap-0 lg:gap-20 rounded-2xl mx-auto shadow-lg px-4 md:py-16 py-8 w-full max-w-screen-xl">
         {/* Left Content */}
         <motion.div
@@ -341,7 +345,7 @@ const DevelopersProfile = () => {
 
         {/* Right Side Image */}
         <motion.div
-          className="w-full lg:w-1/2 flex justify-center"
+          className="w-full lg:w-1/2 flex justify-center items-center flex-col"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
@@ -352,6 +356,7 @@ const DevelopersProfile = () => {
             alt="photograph"
             whileHover={{ scale: 1.05 }}
           />
+          <Resumegen user = {userdata}/>
         </motion.div>
       </div>
 
