@@ -18,7 +18,7 @@ const Projects = () => {
           item.projects.slice(0, 10).map((project) => (
             <div
             onClick={() => {
-              navigate(`/developers/${item._id}`);
+              navigate(`/${item._id}`);
               window.scrollTo(0, 0);
             }}
               key={project._id}
